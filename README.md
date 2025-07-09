@@ -14,7 +14,6 @@ This repository includes all the example code files from the book, organized by 
 
 | Chapter | Folder | Description |
 |--------|--------|-------------|
-| 1 | `chapter01_why_python/` | Why Python? |
 | 2 | `chapter02_setup/` | Getting Python Ready for Action |
 | 3 | `chapter03_variables_data/` | The Very Basics: Variables & Data |
 | 4 | `chapter04_if_else/` | Making Decisions: If/Else |
