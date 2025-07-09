@@ -23,7 +23,6 @@ This repository includes all the example code files from the book, organized by 
 | 7 | `chapter07_files/` | Working with Files |
 | 8 | `chapter08_lists_dicts/` | Handling Lists & Dictionaries |
 | 9 | `chapter09_automation/` | Your First Automation Adventures |
-| 10 | `chapter10_continues/` | Your Python Journey Continues |
 
 ---
 
