@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4: Making Decisions Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .quiz-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .question h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            list-style: none;
+        }
+
+        .options li {
+            margin: 10px 0;
+            padding: 10px 15px;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .options li:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .options li.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .options li.correct {
+            background: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+
+        .options li.incorrect {
+            background: #dc3545;
+            border-color: #dc3545;
+            color: white;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            min-width: 100px;
+            padding: 5px 10px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            background: white;
+            font-family: 'Courier New', monospace;
+        }
+
+        .controls {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .score-display {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .explanation {
+            background: #e8f4f8;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔄 Chapter 4: Making Decisions (if/else)</h1>
+            <p>Test your understanding of Python's decision-making power!</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <!-- Multiple Choice Questions -->
+        <div class="quiz-section">
+            <div class="section-title">🎯 Multiple Choice Questions</div>
+            
+            <div class="question" data-question="1">
+                <h3>1. What is a condition in Python programming?</h3>
+                <ul class="options">
+                    <li data-answer="a">A statement that can only be True or False</li>
+                    <li data-answer="b">A type of variable</li>
+                    <li data-answer="c">A function that prints text</li>
+                    <li data-answer="d">A way to create loops</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> A condition is a statement that evaluates to either True or False, like asking a yes/no question that helps your program make decisions.
+                </div>
+            </div>
+
+            <div class="question" data-question="2">
+                <h3>2. What happens if you forget to indent the code inside an if statement?</h3>
+                <ul class="options">
+                    <li data-answer="a">The code runs normally</li>
+                    <li data-answer="b">Python gives an IndentationError</li>
+                    <li data-answer="c">The code runs twice</li>
+                    <li data-answer="d">Python ignores the if statement</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> Python requires proper indentation to know which lines belong to the if statement. Without it, you'll get an IndentationError.
+                </div>
+            </div>
+
+            <div class="question" data-question="3">
+                <h3>3. What's the difference between = and == in Python?</h3>
+                <ul class="options">
+                    <li data-answer="a">There is no difference</li>
+                    <li data-answer="b">= is for comparing, == is for assigning</li>
+                    <li data-answer="c">= is for assigning, == is for comparing</li>
+                    <li data-answer="d">Both are used for math operations</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> = assigns a value to a variable ("make this equal to that"), while == compares two values ("are these equal?").
+                </div>
+            </div>
+
+            <div class="question" data-question="4">
+                <h3>4. What does the modulo operator (%) do?</h3>
+                <ul class="options">
+                    <li data-answer="a">Calculates percentages</li>
+                    <li data-answer="b">Returns the remainder after division</li>
+                    <li data-answer="c">Multiplies two numbers</li>
+                    <li data-answer="d">Divides two numbers</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> The modulo operator (%) returns the remainder after division. For example, 13 % 5 = 3 because 13 ÷ 5 = 2 with remainder 3.
+                </div>
+            </div>
+
+            <div class="question" data-question="5">
+                <h3>5. When does an else block execute?</h3>
+                <ul class="options">
+                    <li data-answer="a">Always, regardless of the if condition</li>
+                    <li data-answer="b">Only when the if condition is True</li>
+                    <li data-answer="c">Only when the if condition is False</li>
+                    <li data-answer="d">Never, it's just for documentation</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> The else block only runs when the if condition is False. It's like having a backup plan that automatically kicks in.
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Analysis -->
+        <div class="quiz-section">
+            <div class="section-title">🔍 Code Analysis</div>
+            
+            <div class="question" data-question="6">
+                <h3>6. What will this code output when temperature = 25?</h3>
+                <div class="code-block">temperature = 25
+if temperature > 30:
+    print("It's hot!")
+elif temperature > 20:
+    print("It's warm!")
+else:
+    print("It's cool!")</div>
+                <ul class="options">
+                    <li data-answer="a">It's hot!</li>
+                    <li data-answer="b">It's warm!</li>
+                    <li data-answer="c">It's cool!</li>
+                    <li data-answer="d">Nothing will print</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> Since 25 > 20 is True, Python executes the first elif block and prints "It's warm!" Python stops checking conditions after finding the first True one.
+                </div>
+            </div>
+
+            <div class="question" data-question="7">
+                <h3>7. What does this condition check?</h3>
+                <div class="code-block">if age >= 18 and has_license == True:</div>
+                <ul class="options">
+                    <li data-answer="a">If age is 18 or has a license</li>
+                    <li data-answer="b">If age is 18 and has a license</li>
+                    <li data-answer="c">If age is at least 18 and has a license</li>
+                    <li data-answer="d">If age is exactly 18 and has a license</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> The condition checks if age is at least 18 (>= means greater than or equal to) AND has_license is True. Both conditions must be true.
+                </div>
+            </div>
+
+            <div class="question" data-question="8">
+                <h3>8. What will happen with this code?</h3>
+                <div class="code-block">number = 10
+if number % 2 == 0:
+    print("Even")
+else:
+    print("Odd")</div>
+                <ul class="options">
+                    <li data-answer="a">Prints "Even"</li>
+                    <li data-answer="b">Prints "Odd"</li>
+                    <li data-answer="c">Prints both "Even" and "Odd"</li>
+                    <li data-answer="d">Causes an error</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> 10 % 2 = 0, and 0 == 0 is True, so it prints "Even". This is a common way to check if a number is even (remainder 0 when divided by 2).
+                </div>
+            </div>
+        </div>
+
+        <!-- Logical Operators -->
+        <div class="quiz-section">
+            <div class="section-title">🧠 Logical Operators</div>
+            
+            <div class="question" data-question="9">
+                <h3>9. Which logical operator means "both conditions must be True"?</h3>
+                <ul class="options">
+                    <li data-answer="a">or</li>
+                    <li data-answer="b">and</li>
+                    <li data-answer="c">not</li>
+                    <li data-answer="d">if</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> The 'and' operator is "the perfectionist" - both conditions must be True for the entire expression to be True.
+                </div>
+            </div>
+
+            <div class="question" data-question="10">
+                <h3>10. What does the 'not' operator do?</h3>
+                <ul class="options">
+                    <li data-answer="a">Checks if two things are different</li>
+                    <li data-answer="b">Flips True to False and False to True</li>
+                    <li data-answer="c">Combines two conditions</li>
+                    <li data-answer="d">Creates a new variable</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> The 'not' operator is like "opposite day" - it flips the boolean value. not True becomes False, and not False becomes True.
+                </div>
+            </div>
+
+            <div class="question" data-question="11">
+                <h3>11. When is this condition True?</h3>
+                <div class="code-block">if day == "Monday" or day == "Friday":</div>
+                <ul class="options">
+                    <li data-answer="a">Only when day is "Monday"</li>
+                    <li data-answer="b">Only when day is "Friday"</li>
+                    <li data-answer="c">When day is either "Monday" or "Friday"</li>
+                    <li data-answer="d">When day is both "Monday" and "Friday"</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> The 'or' operator is "the flexible friend" - it's True when at least one condition is True, so either Monday OR Friday will work.
+                </div>
+            </div>
+        </div>
+
+        <!-- Fill in the Blanks -->
+        <div class="quiz-section">
+            <div class="section-title">✏️ Fill in the Blanks</div>
+            
+            <div class="question" data-question="12">
+                <h3>12. Complete this invoice status checker:</h3>
+                <div class="code-block">invoice_status = "pending"
+days_past_due = 5
+
+<input type="text" class="fill-blank" id="blank1" placeholder="if"> invoice_status == "pending" <input type="text" class="fill-blank" id="blank2" placeholder="??"> days_past_due > 0:
+    print("Send reminder")
+<input type="text" class="fill-blank" id="blank3" placeholder="????"> invoice_status == "paid":
+    print("Thank you!")
+<input type="text" class="fill-blank" id="blank4" placeholder="????">:
+    print("Check status")</div>
+                <p><strong>Fill in:</strong> The keywords needed to create a complete if/elif/else structure.</p>
+                <button class="btn" onclick="checkFillBlanks()">Check Answers</button>
+                <div class="explanation" id="fillBlankExplanation">
+                    Correct answers: "if", "and", "elif", "else" - This creates a complete decision structure that checks multiple conditions in order.
+                </div>
+            </div>
+        </div>
+
+        <!-- True/False -->
+        <div class="quiz-section">
+            <div class="section-title">✅ True or False</div>
+            
+            <div class="question" data-question="13">
+                <h3>13. Python checks all elif conditions even after finding one that's True.</h3>
+                <ul class="options">
+                    <li data-answer="a">True</li>
+                    <li data-answer="b">False</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> False! Python stops checking conditions as soon as it finds the first True one. It's like a decision tree where you only follow one path.
+                </div>
+            </div>
+
+            <div class="question" data-question="14">
+                <h3>14. You can have multiple elif statements in a single if/elif/else structure.</h3>
+                <ul class="options">
+                    <li data-answer="a">True</li>
+                    <li data-answer="b">False</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> True! You can have as many elif statements as you need. It's like having a sophisticated decision tree with multiple branches.
+                </div>
+            </div>
+
+            <div class="question" data-question="15">
+                <h3>15. This condition will always be True:</h3>
+                <div class="code-block">if 5 > 3 or 5 < 3:</div>
+                <ul class="options">
+                    <li data-answer="a">True</li>
+                    <li data-answer="b">False</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> True! Since 5 > 3 is True, and 'or' only needs one condition to be True, this will always be True regardless of the second condition.
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn" onclick="checkAllAnswers()">Check All Answers</button>
+            <button class="btn" onclick="resetQuiz()">Reset Quiz</button>
+        </div>
+
+        <div class="score-display" id="scoreDisplay">
+            <h3>🎉 Quiz Complete!</h3>
+            <p id="scoreText">Your Score: 0/15</p>
+            <p id="performanceText">Keep practicing!</p>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            1: 'a', 2: 'b', 3: 'c', 4: 'b', 5: 'c',
+            6: 'b', 7: 'c', 8: 'a', 9: 'b', 10: 'b',
+            11: 'c', 13: 'b', 14: 'a', 15: 'a'
+        };
+
+        let currentScore = 0;
+        let totalQuestions = 15;
+        let answeredQuestions = new Set();
+
+        function selectAnswer(questionNum, selectedLi) {
+            const question = document.querySelector(`[data-question="${questionNum}"]`);
+            const options = question.querySelectorAll('.options li');
+            
+            // Remove previous selections
+            options.forEach(li => {
+                li.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            // Mark selected answer
+            selectedLi.classList.add('selected');
+            
+            // Store the answer
+            const answer = selectedLi.dataset.answer;
+            question.dataset.selectedAnswer = answer;
+            
+            updateProgress();
+        }
+
+        function checkFillBlanks() {
+            const blank1 = document.getElementById('blank1').value.trim().toLowerCase();
+            const blank2 = document.getElementById('blank2').value.trim().toLowerCase();
+            const blank3 = document.getElementById('blank3').value.trim().toLowerCase();
+            const blank4 = document.getElementById('blank4').value.trim().toLowerCase();
+            
+            let isCorrect = true;
+            
+            if (blank1 !== 'if') isCorrect = false;
+            if (blank2 !== 'and') isCorrect = false;
+            if (blank3 !== 'elif') isCorrect = false;
+            if (blank4 !== 'else') isCorrect = false;
+            
+            const explanation = document.getElementById('fillBlankExplanation');
+            explanation.style.display = 'block';
+            
+            if (isCorrect) {
+                explanation.style.background = '#d4edda';
+                explanation.style.borderColor = '#28a745';
+                if (!answeredQuestions.has(12)) {
+                    currentScore++;
+                    answeredQuestions.add(12);
+                }
+            } else {
+                explanation.style.background = '#f8d7da';
+                explanation.style.borderColor = '#dc3545';
+            }
+            
+            updateProgress();
+        }
+
+        function checkAllAnswers() {
+            let score = 0;
+            
+            // Check multiple choice and true/false questions
+            for (let i = 1; i <= 15; i++) {
+                if (i === 12) continue; // Skip fill-in-the-blank
+                
+                const question = document.querySelector(`[data-question="${i}"]`);
+                if (!question) continue;
+                
+                const selectedAnswer = question.dataset.selectedAnswer;
+                const correctAnswer = correctAnswers[i];
+                const options = question.querySelectorAll('.options li');
+                
+                options.forEach(li => {
+                    const answer = li.dataset.answer;
+                    li.classList.remove('selected');
+                    
+                    if (answer === correctAnswer) {
+                        li.classList.add('correct');
+                    } else if (answer === selectedAnswer && answer !== correctAnswer) {
+                        li.classList.add('incorrect');
+                    }
+                });
+                
+                if (selectedAnswer === correctAnswer) {
+                    score++;
+                }
+                
+                // Show explanation
+                const explanation = question.querySelector('.explanation');
+                if (explanation) {
+                    explanation.style.display = 'block';
+                }
+            }
+            
+            // Add fill-in-the-blank score if already checked
+            if (answeredQuestions.has(12)) {
+                score++;
+            }
+            
+            currentScore = score;
+            showScore();
+        }
+
+        function showScore() {
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const scoreText = document.getElementById('scoreText');
+            const performanceText = document.getElementById('performanceText');
+            
+            scoreText.textContent = `Your Score: ${currentScore}/${totalQuestions}`;
+            
+            const percentage = (currentScore / totalQuestions) * 100;
+            if (percentage >= 90) {
+                performanceText.textContent = "Outstanding! You've mastered if/else statements! 🌟";
+                performanceText.style.color = '#28a745';
+            } else if (percentage >= 70) {
+                performanceText.textContent = "Great work! You understand decision-making in Python! 👍";
+                performanceText.style.color = '#ffc107';
+            } else {
+                performanceText.textContent = "Keep practicing! Review the chapter and try again! 📚";
+                performanceText.style.color = '#dc3545';
+            }
+            
+            scoreDisplay.style.display = 'block';
+            updateProgress();
+        }
+
+        function resetQuiz() {
+            // Reset all selections
+            document.querySelectorAll('.options li').forEach(li => {
+                li.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            // Reset fill-in-the-blank
+            document.querySelectorAll('.fill-blank').forEach(input => {
+                input.value = '';
+            });
+            
+            // Hide explanations
+            document.querySelectorAll('.explanation').forEach(exp => {
+                exp.style.display = 'none';
+            });
+            
+            // Hide score
+            document.getElementById('scoreDisplay').style.display = 'none';
+            
+            // Reset tracking variables
+            currentScore = 0;
+            answeredQuestions.clear();
+            
+            // Reset selected answers
+            document.querySelectorAll('[data-question]').forEach(q => {
+                delete q.dataset.selectedAnswer;
+            });
+            
+            updateProgress();
+        }
+
+        function updateProgress() {
+            let answeredCount = 0;
+            
+            // Count multiple choice answers
+            for (let i = 1; i <= 15; i++) {
+                if (i === 12) continue;
+                const question = document.querySelector(`[data-question="${i}"]`);
+                if (question && question.dataset.selectedAnswer) {
+                    answeredCount++;
+                }
+            }
+            
+            // Add fill-in-the-blank if answered
+            if (answeredQuestions.has(12)) {
+                answeredCount++;
+            }
+            
+            const percentage = (answeredCount / totalQuestions) * 100;
+            document.getElementById('progressFill').style.width = percentage + '%';
+        }
+
+        // Add click event listeners to all options
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.options li').forEach(li => {
+                li.addEventListener('click', function() {
+                    const question = this.closest('[data-question]');
+                    const questionNum = parseInt(question.dataset.question);
+                    selectAnswer(questionNum, this);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
