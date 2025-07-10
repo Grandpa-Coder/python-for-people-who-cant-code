@@ -16,7 +16,8 @@ This repository includes all the example code files from the book, organized by 
 
 Test your knowledge with interactive quizzes and practice exercises:
 - [Chapter 3 Quiz: Variables & Data](https://grandpa-coder.github.io/python-for-people-who-cant-code/resources/chapter3-quiz.html)
-- [Chapter 4 Quiz: Making Decisions](https://grandpa-coder.github.io/python-for-people-who-cant-code/resources/chapter4-quiz.html)
+- [Chapter 4 Quiz: Making Decisions (if/else)](https://grandpa-coder.github.io/python-for-people-who-cant-code/resources/chapter4-quiz.html)
+- [Chapter 4 Quiz: Repeating Actions (Loops)](https://grandpa-coder.github.io/python-for-people-who-cant-code/resources/chapter5-quiz.html)
 - More quizzes coming soon for each chapter!
 
 ---
