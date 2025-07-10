@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 5: Repeating Actions - Loops Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .quiz-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .question h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            list-style: none;
+        }
+
+        .options li {
+            margin: 10px 0;
+            padding: 10px 15px;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .options li:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .options li.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .options li.correct {
+            background: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+
+        .options li.incorrect {
+            background: #dc3545;
+            border-color: #dc3545;
+            color: white;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+            font-size: 0.9em;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            min-width: 80px;
+            padding: 5px 10px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            background: white;
+            font-family: 'Courier New', monospace;
+        }
+
+        .controls {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .score-display {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .explanation {
+            background: #e8f4f8;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .danger-zone {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔄 Chapter 5: Repeating Actions (Loops)</h1>
+            <p>Test your understanding of Python's automation powerhouse!</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <!-- Multiple Choice Questions -->
+        <div class="quiz-section">
+            <div class="section-title">🎯 Multiple Choice Questions</div>
+            
+            <div class="question" data-question="1">
+                <h3>1. What is the main purpose of loops in programming?</h3>
+                <ul class="options">
+                    <li data-answer="a">To make decisions in code</li>
+                    <li data-answer="b">To repeat a set of instructions multiple times</li>
+                    <li data-answer="c">To store data in variables</li>
+                    <li data-answer="d">To create functions</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> Loops are designed to repeat instructions, automating tedious tasks and letting Python do the repetitive work for you.
+                </div>
+            </div>
+
+            <div class="question" data-question="2">
+                <h3>2. Which loop is best when you have a collection of items to process?</h3>
+                <ul class="options">
+                    <li data-answer="a">while loop</li>
+                    <li data-answer="b">for loop</li>
+                    <li data-answer="c">if loop</li>
+                    <li data-answer="d">break loop</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> A for loop is perfect when you have a collection (like a list) and want to do something with each item in that collection.
+                </div>
+            </div>
+
+            <div class="question" data-question="3">
+                <h3>3. What does range(5) generate?</h3>
+                <ul class="options">
+                    <li data-answer="a">Numbers 1, 2, 3, 4, 5</li>
+                    <li data-answer="b">Numbers 0, 1, 2, 3, 4</li>
+                    <li data-answer="c">Numbers 1, 2, 3, 4</li>
+                    <li data-answer="d">The number 5</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> range(5) generates numbers from 0 up to (but not including) 5, so: 0, 1, 2, 3, 4.
+                </div>
+            </div>
+
+            <div class="question" data-question="4">
+                <h3>4. What is an infinite loop?</h3>
+                <ul class="options">
+                    <li data-answer="a">A loop that runs very fast</li>
+                    <li data-answer="b">A loop that never stops running</li>
+                    <li data-answer="c">A loop that runs backwards</li>
+                    <li data-answer="d">A loop that prints infinite numbers</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> An infinite loop never stops running because the condition never becomes False - like a hamster wheel that never stops spinning!
+                </div>
+            </div>
+
+            <div class="question" data-question="5">
+                <h3>5. What does the break statement do in a loop?</h3>
+                <ul class="options">
+                    <li data-answer="a">Pauses the loop for a few seconds</li>
+                    <li data-answer="b">Exits the loop immediately</li>
+                    <li data-answer="c">Skips to the next iteration</li>
+                    <li data-answer="d">Restarts the loop from the beginning</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> The break statement exits the loop immediately, like an emergency exit door - once you use it, you're out!
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Analysis -->
+        <div class="quiz-section">
+            <div class="section-title">🔍 Code Analysis</div>
+            
+            <div class="question" data-question="6">
+                <h3>6. What will this code output?</h3>
+                <div class="code-block">for i in range(3):
+    print(f"Count: {i}")</div>
+                <ul class="options">
+                    <li data-answer="a">Count: 1<br>Count: 2<br>Count: 3</li>
+                    <li data-answer="b">Count: 0<br>Count: 1<br>Count: 2</li>
+                    <li data-answer="c">Count: 3</li>
+                    <li data-answer="d">Nothing will print</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> range(3) generates 0, 1, 2, so the loop prints "Count: 0", "Count: 1", "Count: 2".
+                </div>
+            </div>
+
+            <div class="question" data-question="7">
+                <h3>7. What will happen with this while loop?</h3>
+                <div class="code-block">count = 0
+while count < 3:
+    print("Hello!")
+    count += 1</div>
+                <ul class="options">
+                    <li data-answer="a">Prints "Hello!" once</li>
+                    <li data-answer="b">Prints "Hello!" three times</li>
+                    <li data-answer="c">Prints "Hello!" forever</li>
+                    <li data-answer="d">Causes an error</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> The loop starts with count=0, runs while count<3, and increments count each time, so it prints "Hello!" exactly 3 times.
+                </div>
+            </div>
+
+            <div class="question" data-question="8">
+                <h3>8. What does this code demonstrate?</h3>
+                <div class="code-block">numbers = [1, 2, 3, 4, 5]
+for num in numbers:
+    if num == 3:
+        continue
+    print(num)</div>
+                <ul class="options">
+                    <li data-answer="a">Prints all numbers</li>
+                    <li data-answer="b">Prints 1, 2, 4, 5 (skips 3)</li>
+                    <li data-answer="c">Prints only the number 3</li>
+                    <li data-answer="d">Stops at number 3</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> The continue statement skips the rest of the current iteration when num equals 3, so it prints 1, 2, 4, 5.
+                </div>
+            </div>
+
+            <div class="question" data-question="9">
+                <h3>9. What's wrong with this while loop?</h3>
+                <div class="code-block">temperature = 75
+while temperature > 70:
+    print("It's warm!")</div>
+                <div class="danger-zone">
+                    <strong>⚠️ Warning:</strong> This is a dangerous loop pattern!
+                </div>
+                <ul class="options">
+                    <li data-answer="a">Nothing is wrong</li>
+                    <li data-answer="b">It will create an infinite loop</li>
+                    <li data-answer="c">The condition is backwards</li>
+                    <li data-answer="d">It should use a for loop instead</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> This creates an infinite loop because temperature never changes inside the loop, so the condition (75 > 70) is always True!
+                </div>
+            </div>
+        </div>
+
+        <!-- F-strings and Formatting -->
+        <div class="quiz-section">
+            <div class="section-title">✨ F-strings and Formatting</div>
+            
+            <div class="question" data-question="10">
+                <h3>10. What does the 'f' in f-strings stand for?</h3>
+                <ul class="options">
+                    <li data-answer="a">Fast</li>
+                    <li data-answer="b">Formatted</li>
+                    <li data-answer="c">Function</li>
+                    <li data-answer="d">Final</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> The 'f' stands for "formatted" - f-strings are formatted string literals that let you easily include variables in your text.
+                </div>
+            </div>
+
+            <div class="question" data-question="11">
+                <h3>11. What does \n do in a string?</h3>
+                <ul class="options">
+                    <li data-answer="a">Creates a tab space</li>
+                    <li data-answer="b">Creates a new line</li>
+                    <li data-answer="c">Creates a backslash</li>
+                    <li data-answer="d">Nothing special</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> \n is an escape sequence that creates a new line, like pressing Enter in your output.
+                </div>
+            </div>
+
+            <div class="question" data-question="12">
+                <h3>12. What will this f-string output if name="Alex" and age=25?</h3>
+                <div class="code-block">print(f"Hello {name}, you are {age} years old!")</div>
+                <ul class="options">
+                    <li data-answer="a">Hello {name}, you are {age} years old!</li>
+                    <li data-answer="b">Hello Alex, you are 25 years old!</li>
+                    <li data-answer="c">Hello name, you are age years old!</li>
+                    <li data-answer="d">An error will occur</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> F-strings automatically replace {name} with "Alex" and {age} with "25", creating personalized output.
+                </div>
+            </div>
+        </div>
+
+        <!-- Nested Loops -->
+        <div class="quiz-section">
+            <div class="section-title">🪆 Nested Loops</div>
+            
+            <div class="question" data-question="13">
+                <h3>13. What are nested loops?</h3>
+                <ul class="options">
+                    <li data-answer="a">Loops that run backwards</li>
+                    <li data-answer="b">Loops inside other loops</li>
+                    <li data-answer="c">Loops that never end</li>
+                    <li data-answer="d">Loops that run very fast</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> Nested loops are loops inside other loops - like Russian nesting dolls (matryoshka), where one contains another.
+                </div>
+            </div>
+
+            <div class="question" data-question="14">
+                <h3>14. How many times will "Hello" be printed?</h3>
+                <div class="code-block">for i in range(2):
+    for j in range(3):
+        print("Hello")</div>
+                <ul class="options">
+                    <li data-answer="a">2 times</li>
+                    <li data-answer="b">3 times</li>
+                    <li data-answer="c">5 times</li>
+                    <li data-answer="d">6 times</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> The outer loop runs 2 times, and for each of those times, the inner loop runs 3 times: 2 × 3 = 6 times total.
+                </div>
+            </div>
+        </div>
+
+        <!-- Fill in the Blanks -->
+        <div class="quiz-section">
+            <div class="section-title">✏️ Fill in the Blanks</div>
+            
+            <div class="question" data-question="15">
+                <h3>15. Complete this shopping cart total calculator:</h3>
+                <div class="code-block">prices = [10.99, 5.50, 8.25, 12.00]
+total = 0
+
+<input type="text" class="fill-blank" id="blank1" placeholder="???"> price <input type="text" class="fill-blank" id="blank2" placeholder="??"> prices:
+    total <input type="text" class="fill-blank" id="blank3" placeholder="??"> price
+
+print(f"Total: ${total}")</div>
+                <p><strong>Fill in:</strong> The keywords needed to create a loop that adds up all prices.</p>
+                <button class="btn" onclick="checkFillBlanks()">Check Answers</button>
+                <div class="explanation" id="fillBlankExplanation">
+                    Correct answers: "for", "in", "+=" - This creates a loop that goes through each price and adds it to the total.
+                </div>
+            </div>
+        </div>
+
+        <!-- True/False -->
+        <div class="quiz-section">
+            <div class="section-title">✅ True or False</div>
+            
+            <div class="question" data-question="16">
+                <h3>16. A for loop always runs a fixed number of times.</h3>
+                <ul class="options">
+                    <li data-answer="a">True</li>
+                    <li data-answer="b">False</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> False! A for loop can use break to exit early, so it doesn't always run a fixed number of times.
+                </div>
+            </div>
+
+            <div class="question" data-question="17">
+                <h3>17. The continue statement exits the entire loop.</h3>
+                <ul class="options">
+                    <li data-answer="a">True</li>
+                    <li data-answer="b">False</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> False! The continue statement only skips the current iteration and moves to the next one. It's break that exits the entire loop.
+                </div>
+            </div>
+
+            <div class="question" data-question="18">
+                <h3>18. range(1, 5) generates the numbers 1, 2, 3, 4, 5.</h3>
+                <ul class="options">
+                    <li data-answer="a">True</li>
+                    <li data-answer="b">False</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> False! range(1, 5) generates 1, 2, 3, 4 - it stops before the ending number (5).
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn" onclick="checkAllAnswers()">Check All Answers</button>
+            <button class="btn" onclick="resetQuiz()">Reset Quiz</button>
+        </div>
+
+        <div class="score-display" id="scoreDisplay">
+            <h3>🎉 Quiz Complete!</h3>
+            <p id="scoreText">Your Score: 0/18</p>
+            <p id="performanceText">Keep practicing!</p>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            1: 'b', 2: 'b', 3: 'b', 4: 'b', 5: 'b',
+            6: 'b', 7: 'b', 8: 'b', 9: 'b', 10: 'b',
+            11: 'b', 12: 'b', 13: 'b', 14: 'd', 16: 'b',
+            17: 'b', 18: 'b'
+        };
+
+        let currentScore = 0;
+        let totalQuestions = 18;
+        let answeredQuestions = new Set();
+
+        function selectAnswer(questionNum, selectedLi) {
+            const question = document.querySelector(`[data-question="${questionNum}"]`);
+            const options = question.querySelectorAll('.options li');
+            
+            // Remove previous selections
+            options.forEach(li => {
+                li.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            // Mark selected answer
+            selectedLi.classList.add('selected');
+            
+            // Store the answer
+            const answer = selectedLi.dataset.answer;
+            question.dataset.selectedAnswer = answer;
+            
+            updateProgress();
+        }
+
+        function checkFillBlanks() {
+            const blank1 = document.getElementById('blank1').value.trim().toLowerCase();
+            const blank2 = document.getElementById('blank2').value.trim().toLowerCase();
+            const blank3 = document.getElementById('blank3').value.trim().toLowerCase();
+            
+            let isCorrect = true;
+            
+            if (blank1 !== 'for') isCorrect = false;
+            if (blank2 !== 'in') isCorrect = false;
+            if (blank3 !== '+=' && blank3 !== '+=') isCorrect = false;
+            
+            const explanation = document.getElementById('fillBlankExplanation');
+            explanation.style.display = 'block';
+            
+            if (isCorrect) {
+                explanation.style.background = '#d4edda';
+                explanation.style.borderColor = '#28a745';
+                if (!answeredQuestions.has(15)) {
+                    currentScore++;
+                    answeredQuestions.add(15);
+                }
+            } else {
+                explanation.style.background = '#f8d7da';
+                explanation.style.borderColor = '#dc3545';
+            }
+            
+            updateProgress();
+        }
+
+        function checkAllAnswers() {
+            let score = 0;
+            
+            // Check multiple choice and true/false questions
+            for (let i = 1; i <= 18; i++) {
+                if (i === 15) continue; // Skip fill-in-the-blank
+                
+                const question = document.querySelector(`[data-question="${i}"]`);
+                if (!question) continue;
+                
+                const selectedAnswer = question.dataset.selectedAnswer;
+                const correctAnswer = correctAnswers[i];
+                const options = question.querySelectorAll('.options li');
+                
+                options.forEach(li => {
+                    const answer = li.dataset.answer;
+                    li.classList.remove('selected');
+                    
+                    if (answer === correctAnswer) {
+                        li.classList.add('correct');
+                    } else if (answer === selectedAnswer && answer !== correctAnswer) {
+                        li.classList.add('incorrect');
+                    }
+                });
+                
+                if (selectedAnswer === correctAnswer) {
+                    score++;
+                }
+                
+                // Show explanation
+                const explanation = question.querySelector('.explanation');
+                if (explanation) {
+                    explanation.style.display = 'block';
+                }
+            }
+            
+            // Add fill-in-the-blank score if already checked
+            if (answeredQuestions.has(15)) {
+                score++;
+            }
+            
+            currentScore = score;
+            showScore();
+        }
+
+        function showScore() {
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const scoreText = document.getElementById('scoreText');
+            const performanceText = document.getElementById('performanceText');
+            
+            scoreText.textContent = `Your Score: ${currentScore}/${totalQuestions}`;
+            
+            const percentage = (currentScore / totalQuestions) * 100;
+            if (percentage >= 90) {
+                performanceText.textContent = "Outstanding! You've mastered loops and automation! 🚀";
+                performanceText.style.color = '#28a745';
+            } else if (percentage >= 70) {
+                performanceText.textContent = "Great work! You understand Python's repetition power! 🔄";
+                performanceText.style.color = '#ffc107';
+            } else {
+                performanceText.textContent = "Keep practicing! Review loops and try again! 📚";
+                performanceText.style.color = '#dc3545';
+            }
+            
+            scoreDisplay.style.display = 'block';
+            updateProgress();
+        }
+
+        function resetQuiz() {
+            // Reset all selections
+            document.querySelectorAll('.options li').forEach(li => {
+                li.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            // Reset fill-in-the-blank
+            document.querySelectorAll('.fill-blank').forEach(input => {
+                input.value = '';
+            });
+            
+            // Hide explanations
+            document.querySelectorAll('.explanation').forEach(exp => {
+                exp.style.display = 'none';
+            });
+            
+            // Hide score
+            document.getElementById('scoreDisplay').style.display = 'none';
+            
+            // Reset tracking variables
+            currentScore = 0;
+            answeredQuestions.clear();
+            
+            // Reset selected answers
+            document.querySelectorAll('[data-question]').forEach(q => {
+                delete q.dataset.selectedAnswer;
+            });
+            
+            updateProgress();
+        }
+
+        function updateProgress() {
+            let answeredCount = 0;
+            
+            // Count multiple choice answers
+            for (let i = 1; i <= 18; i++) {
+                if (i === 15) continue;
+                const question = document.querySelector(`[data-question="${i}"]`);
+                if (question && question.dataset.selectedAnswer) {
+                    answeredCount++;
+                }
+            }
+            
+            // Add fill-in-the-blank if answered
+            if (answeredQuestions.has(15)) {
+                answeredCount++;
+            }
+            
+            const percentage = (answeredCount / totalQuestions) * 100;
+            document.getElementById('progressFill').style.width = percentage + '%';
+        }
+
+        // Add click event listeners to all options
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.options li').forEach(li => {
+                li.addEventListener('click', function() {
+                    const question = this.closest('[data-question]');
+                    const questionNum = parseInt(question.dataset.question);
+                    selectAnswer(questionNum, this);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
