@@ -28,8 +28,8 @@ Test your knowledge with interactive quizzes and practice exercises:
 |--------|--------|-------------|------------------|
 | 2 | `chapter02_setup/` | Getting Python Ready for Action | Coming Soon |
 | 3 | `chapter03_variables_data/` | The Very Basics: Variables & Data | [📝 Quiz](https://grandpa-coder.github.io/python-for-people-who-cant-code/resources/chapter3-quiz.html) |
-| 4 | `chapter04_if_else/` | Making Decisions: If/Else | [📝 Quiz](https://grandpa-coder.github.io/python-for-people-who-cant-code/resources/chapter5-quiz.html) | 
-| 5 | `chapter05_loops/` | Repeating Actions: Loops | Coming Soon |
+| 4 | `chapter04_if_else/` | Making Decisions: If/Else | [📝 Quiz](https://grandpa-coder.github.io/python-for-people-who-cant-code/resources/chapter4-quiz.html) | 
+| 5 | `chapter05_loops/` | Repeating Actions: Loops | [📝 Quiz](https://grandpa-coder.github.io/python-for-people-who-cant-code/resources/chapter5-quiz.html) |
 | 6 | `chapter06_problem_solver/` | Your Daily Problem Solver | Coming Soon |
 | 7 | `chapter07_files/` | Working with Files | Coming Soon |
 | 8 | `chapter08_lists_dicts/` | Handling Lists & Dictionaries | Coming Soon |
