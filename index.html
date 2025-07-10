@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Resources - Python for People Who Think They Can't Code</title>
+    <title>Python Book - Complete Resources</title>
     <style>
         * {
             margin: 0;
@@ -15,191 +15,203 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            color: #333;
+            padding: 20px;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
 
         .header {
             text-align: center;
             margin-bottom: 40px;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 40px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding-bottom: 30px;
+            border-bottom: 3px solid #667eea;
         }
 
         .header h1 {
+            color: #333;
             font-size: 2.5em;
-            color: #2c3e50;
             margin-bottom: 10px;
-            background: linear-gradient(45deg, #3498db, #8e44ad);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         .header p {
+            color: #666;
             font-size: 1.2em;
-            color: #7f8c8d;
-            margin-bottom: 20px;
         }
 
-        .python-emoji {
-            font-size: 3em;
-            margin-bottom: 20px;
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .nav-tab {
+            padding: 15px 30px;
+            background: transparent;
+            border: none;
+            color: #666;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .nav-tab:hover {
+            color: #667eea;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
             display: block;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
         }
 
         .resources-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
-            margin-bottom: 40px;
+            margin-top: 30px;
         }
 
         .resource-card {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 30px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             border-radius: 15px;
+            padding: 30px;
             text-align: center;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .resource-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        .resource-card:hover::before {
-            left: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid transparent;
         }
 
         .resource-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border-color: #667eea;
         }
 
         .resource-card h3 {
+            color: #333;
             font-size: 1.5em;
-            color: #2c3e50;
             margin-bottom: 15px;
         }
 
         .resource-card p {
-            color: #7f8c8d;
+            color: #666;
             margin-bottom: 20px;
             line-height: 1.6;
         }
 
-        .quiz-btn {
-            display: inline-block;
-            background: linear-gradient(45deg, #3498db, #2ecc71);
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
             color: white;
-            padding: 12px 30px;
             text-decoration: none;
+            padding: 12px 30px;
             border-radius: 25px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+            display: inline-block;
+            margin: 5px;
         }
 
-        .quiz-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s;
+        .btn:hover {
+            transform: translateY(-2px);
         }
 
-        .quiz-btn:hover::before {
-            left: 100%;
+        .btn-secondary {
+            background: linear-gradient(45deg, #6c757d, #495057);
         }
 
-        .quiz-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        .chapter-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
         }
 
         .coming-soon {
-            background: linear-gradient(45deg, #95a5a6, #7f8c8d);
-            cursor: not-allowed;
-            opacity: 0.7;
+            opacity: 0.6;
+            position: relative;
         }
 
-        .coming-soon:hover {
-            transform: none;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .footer {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 30px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-        }
-
-        .footer a {
-            color: #3498db;
-            text-decoration: none;
+        .coming-soon::after {
+            content: "Coming Soon";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #ffc107;
+            color: #333;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
             font-weight: bold;
-            transition: color 0.3s ease;
         }
 
-        .footer a:hover {
-            color: #2c3e50;
+        .new-badge {
+            position: relative;
         }
 
-        .status-badge {
-            display: inline-block;
-            padding: 5px 15px;
+        .new-badge::before {
+            content: "NEW!";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #28a745;
+            color: white;
+            padding: 4px 8px;
             border-radius: 15px;
             font-size: 0.8em;
             font-weight: bold;
-            margin-bottom: 10px;
+            z-index: 1;
         }
 
-        .available {
-            background: #2ecc71;
+        .github-link {
+            background: #333;
             color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
         }
 
-        .coming-soon-badge {
-            background: #f39c12;
+        .github-link a {
             color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .github-link a:hover {
+            text-decoration: underline;
         }
 
         @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
             .header h1 {
                 font-size: 2em;
+            }
+            
+            .nav-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .nav-tab {
+                padding: 10px 20px;
+                font-size: 1em;
             }
             
             .resources-grid {
@@ -211,74 +223,138 @@
 <body>
     <div class="container">
         <div class="header">
-            <span class="python-emoji">🐍</span>
-            <h1>Interactive Resources</h1>
-            <p>Python for People Who Think They Can't Code</p>
-            <p><strong>by Alex Grandpa</strong></p>
+            <h1>🐍 Python Book - Complete Resources</h1>
+            <p>Everything you need to master Python programming</p>
         </div>
 
-        <div class="resources-grid">
-            <div class="resource-card">
-                <span class="status-badge available">✅ Available</span>
-                <h3>Chapter 3: Variables & Data</h3>
-                <p>Test your understanding of Python variables, data types, and basic operations with this interactive quiz.</p>
-                <a href="resources/chapter3-quiz.html" class="quiz-btn">Take Quiz</a>
-            </div>
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('quizzes')">Interactive Quizzes</button>
+            <button class="nav-tab" onclick="showTab('code')">Code Examples</button>
+            <button class="nav-tab" onclick="showTab('projects')">Practice Projects</button>
+            <button class="nav-tab" onclick="showTab('source')">Source Files</button>
+        </div>
 
-            <div class="resource-card">
-                <span class="status-badge coming-soon-badge">🚧 Coming Soon</span>
-                <h3>Chapter 4: If/Else Decisions</h3>
-                <p>Master conditional logic and decision-making in Python with hands-on exercises.</p>
-                <span class="quiz-btn coming-soon">Coming Soon</span>
-            </div>
+        <!-- Interactive Quizzes Tab -->
+        <div id="quizzes" class="tab-content active">
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="chapter-icon">📦</div>
+                    <h3>Chapter 3: Variables & Data Types</h3>
+                    <p>Test your understanding of Python's building blocks with this interactive quiz covering variables, data types, and basic operations.</p>
+                    <a href="resources/chapter3-quiz.html" class="btn">Take Quiz</a>
+                </div>
 
-            <div class="resource-card">
-                <span class="status-badge coming-soon-badge">🚧 Coming Soon</span>
-                <h3>Chapter 5: Loops</h3>
-                <p>Practice for loops, while loops, and iteration techniques with interactive challenges.</p>
-                <span class="quiz-btn coming-soon">Coming Soon</span>
-            </div>
+                <div class="resource-card new-badge">
+                    <div class="chapter-icon">🔄</div>
+                    <h3>Chapter 4: Making Decisions</h3>
+                    <p>Master if/else statements, logical operators, and decision-making in Python. Test your skills with interactive questions and code analysis.</p>
+                    <a href="chapter4_quiz.html" class="btn">Take Quiz</a>
+                </div>
 
-            <div class="resource-card">
-                <span class="status-badge coming-soon-badge">🚧 Coming Soon</span>
-                <h3>Chapter 6: Problem Solver</h3>
-                <p>Apply your Python skills to solve real-world problems and challenges.</p>
-                <span class="quiz-btn coming-soon">Coming Soon</span>
-            </div>
+                <div class="resource-card coming-soon">
+                    <div class="chapter-icon">🔧</div>
+                    <h3>Chapter 5: Functions</h3>
+                    <p>Master the art of writing reusable code with functions and parameters.</p>
+                    <a href="#" class="btn">Take Quiz</a>
+                </div>
 
-            <div class="resource-card">
-                <span class="status-badge coming-soon-badge">🚧 Coming Soon</span>
-                <h3>Chapter 7: Files</h3>
-                <p>Learn to read, write, and manipulate files with practical exercises.</p>
-                <span class="quiz-btn coming-soon">Coming Soon</span>
-            </div>
-
-            <div class="resource-card">
-                <span class="status-badge coming-soon-badge">🚧 Coming Soon</span>
-                <h3>Chapter 8: Lists & Dictionaries</h3>
-                <p>Master Python's most important data structures with interactive practice.</p>
-                <span class="quiz-btn coming-soon">Coming Soon</span>
-            </div>
-
-            <div class="resource-card">
-                <span class="status-badge coming-soon-badge">🚧 Coming Soon</span>
-                <h3>Chapter 9: Automation</h3>
-                <p>Build your first automation scripts and see Python in action.</p>
-                <span class="quiz-btn coming-soon">Coming Soon</span>
-            </div>
-
-            <div class="resource-card">
-                <span class="status-badge coming-soon-badge">🚧 Coming Soon</span>
-                <h3>Practice Projects</h3>
-                <p>Complete hands-on projects that combine everything you've learned.</p>
-                <span class="quiz-btn coming-soon">Coming Soon</span>
+                <div class="resource-card coming-soon">
+                    <div class="chapter-icon">📊</div>
+                    <h3>Chapter 6: Data Structures</h3>
+                    <p>Explore lists, dictionaries, and other ways to organize your data.</p>
+                    <a href="#" class="btn">Take Quiz</a>
+                </div>
             </div>
         </div>
 
-        <div class="footer">
-            <p>📚 <a href="https://github.com/Grandpa-Coder/python-for-people-who-cant-code">View Source Code on GitHub</a></p>
-            <p>💡 Found a bug or have suggestions? <a href="https://github.com/Grandpa-Coder/python-for-people-who-cant-code/issues">Report it here</a></p>
+        <!-- Code Examples Tab -->
+        <div id="code" class="tab-content">
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="chapter-icon">💻</div>
+                    <h3>Chapter Examples</h3>
+                    <p>Download all the code examples organized by chapter. Perfect for following along with the book.</p>
+                    <a href="code-examples/" class="btn">Browse Code</a>
+                    <a href="code-examples/download-all.zip" class="btn btn-secondary">Download All</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="chapter-icon">🐛</div>
+                    <h3>Debugging Examples</h3>
+                    <p>Common mistakes and how to fix them, with step-by-step solutions.</p>
+                    <a href="debugging/" class="btn">View Examples</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Practice Projects Tab -->
+        <div id="projects" class="tab-content">
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="chapter-icon">🎯</div>
+                    <h3>Beginner Projects</h3>
+                    <p>Start with these simple projects to build confidence and apply basic concepts.</p>
+                    <a href="projects/beginner/" class="btn">View Projects</a>
+                </div>
+
+                <div class="resource-card coming-soon">
+                    <div class="chapter-icon">🚀</div>
+                    <h3>Advanced Projects</h3>
+                    <p>Challenge yourself with real-world applications and portfolio-worthy projects.</p>
+                    <a href="projects/advanced/" class="btn">View Projects</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Source Files Tab -->
+        <div id="source" class="tab-content">
+            <div class="github-link">
+                <p>📁 <strong>View All Source Files:</strong> <a href="https://github.com/yourusername/your-repo-name">GitHub Repository</a></p>
+            </div>
+            
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="chapter-icon">📚</div>
+                    <h3>Chapter Source Files</h3>
+                    <p>Original chapter files in various formats (Markdown, Word, etc.)</p>
+                    <a href="chapters/" class="btn">Browse Chapters</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="chapter-icon">🖼️</div>
+                    <h3>Images & Assets</h3>
+                    <p>All diagrams, screenshots, and visual resources used in the book.</p>
+                    <a href="assets/" class="btn">View Assets</a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="chapter-icon">📝</div>
+                    <h3>Errata & Updates</h3>
+                    <p>Known issues, corrections, and updates to the book content.</p>
+                    <a href="errata.md" class="btn">View Errata</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer" style="margin-top: 50px; text-align: center; padding-top: 30px; border-top: 2px solid #e9ecef; color: #666;">
+            <p>📚 Complete resources for <strong>[Your Book Title]</strong></p>
+            <p>Questions? Check the <a href="FAQ.md" style="color: #667eea;">FAQ</a> or <a href="mailto:your-email@example.com" style="color: #667eea;">contact me</a></p>
         </div>
     </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tabs
+            const allTabs = document.querySelectorAll('.tab-content');
+            const allNavTabs = document.querySelectorAll('.nav-tab');
+            
+            allTabs.forEach(tab => tab.classList.remove('active'));
+            allNavTabs.forEach(nav => nav.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
 </body>
 </html>
