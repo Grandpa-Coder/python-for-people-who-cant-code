@@ -17,7 +17,7 @@ This repository includes all the example code files from the book, organized by 
 Test your knowledge with interactive quizzes and practice exercises:
 - [Chapter 3 Quiz: Variables & Data](https://grandpa-coder.github.io/python-for-people-who-cant-code/resources/chapter3-quiz.html)
 - [Chapter 4 Quiz: Making Decisions (if/else)](https://grandpa-coder.github.io/python-for-people-who-cant-code/resources/chapter4-quiz.html)
-- [Chapter 4 Quiz: Repeating Actions (Loops)](https://grandpa-coder.github.io/python-for-people-who-cant-code/resources/chapter5-quiz.html)
+- [Chapter 5 Quiz: Repeating Actions (Loops)](https://grandpa-coder.github.io/python-for-people-who-cant-code/resources/chapter5-quiz.html)
 - More quizzes coming soon for each chapter!
 
 ---
@@ -28,7 +28,7 @@ Test your knowledge with interactive quizzes and practice exercises:
 |--------|--------|-------------|------------------|
 | 2 | `chapter02_setup/` | Getting Python Ready for Action | Coming Soon |
 | 3 | `chapter03_variables_data/` | The Very Basics: Variables & Data | [📝 Quiz](https://grandpa-coder.github.io/python-for-people-who-cant-code/resources/chapter3-quiz.html) |
-| 4 | `chapter04_if_else/` | Making Decisions: If/Else | Coming Soon |
+| 4 | `chapter04_if_else/` | Making Decisions: If/Else | [📝 Quiz](https://grandpa-coder.github.io/python-for-people-who-cant-code/resources/chapter5-quiz.html) | 
 | 5 | `chapter05_loops/` | Repeating Actions: Loops | Coming Soon |
 | 6 | `chapter06_problem_solver/` | Your Daily Problem Solver | Coming Soon |
 | 7 | `chapter07_files/` | Working with Files | Coming Soon |
