@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Resources - Python for People Who Think They Can't Code</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #3498db, #8e44ad);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+
+        .python-emoji {
+            font-size: 3em;
+            margin-bottom: 20px;
+            display: block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .resource-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resource-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .resource-card:hover::before {
+            left: 100%;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .resource-card h3 {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .resource-card p {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .quiz-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quiz-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .quiz-btn:hover::before {
+            left: 100%;
+        }
+
+        .quiz-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .coming-soon {
+            background: linear-gradient(45deg, #95a5a6, #7f8c8d);
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .coming-soon:hover {
+            transform: none;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .footer a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #2c3e50;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .available {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .coming-soon-badge {
+            background: #f39c12;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <span class="python-emoji">🐍</span>
+            <h1>Interactive Resources</h1>
+            <p>Python for People Who Think They Can't Code</p>
+            <p><strong>by Alex Grandpa</strong></p>
+        </div>
+
+        <div class="resources-grid">
+            <div class="resource-card">
+                <span class="status-badge available">✅ Available</span>
+                <h3>Chapter 3: Variables & Data</h3>
+                <p>Test your understanding of Python variables, data types, and basic operations with this interactive quiz.</p>
+                <a href="resources/chapter3-quiz.html" class="quiz-btn">Take Quiz</a>
+            </div>
+
+            <div class="resource-card">
+                <span class="status-badge coming-soon-badge">🚧 Coming Soon</span>
+                <h3>Chapter 4: If/Else Decisions</h3>
+                <p>Master conditional logic and decision-making in Python with hands-on exercises.</p>
+                <span class="quiz-btn coming-soon">Coming Soon</span>
+            </div>
+
+            <div class="resource-card">
+                <span class="status-badge coming-soon-badge">🚧 Coming Soon</span>
+                <h3>Chapter 5: Loops</h3>
+                <p>Practice for loops, while loops, and iteration techniques with interactive challenges.</p>
+                <span class="quiz-btn coming-soon">Coming Soon</span>
+            </div>
+
+            <div class="resource-card">
+                <span class="status-badge coming-soon-badge">🚧 Coming Soon</span>
+                <h3>Chapter 6: Problem Solver</h3>
+                <p>Apply your Python skills to solve real-world problems and challenges.</p>
+                <span class="quiz-btn coming-soon">Coming Soon</span>
+            </div>
+
+            <div class="resource-card">
+                <span class="status-badge coming-soon-badge">🚧 Coming Soon</span>
+                <h3>Chapter 7: Files</h3>
+                <p>Learn to read, write, and manipulate files with practical exercises.</p>
+                <span class="quiz-btn coming-soon">Coming Soon</span>
+            </div>
+
+            <div class="resource-card">
+                <span class="status-badge coming-soon-badge">🚧 Coming Soon</span>
+                <h3>Chapter 8: Lists & Dictionaries</h3>
+                <p>Master Python's most important data structures with interactive practice.</p>
+                <span class="quiz-btn coming-soon">Coming Soon</span>
+            </div>
+
+            <div class="resource-card">
+                <span class="status-badge coming-soon-badge">🚧 Coming Soon</span>
+                <h3>Chapter 9: Automation</h3>
+                <p>Build your first automation scripts and see Python in action.</p>
+                <span class="quiz-btn coming-soon">Coming Soon</span>
+            </div>
+
+            <div class="resource-card">
+                <span class="status-badge coming-soon-badge">🚧 Coming Soon</span>
+                <h3>Practice Projects</h3>
+                <p>Complete hands-on projects that combine everything you've learned.</p>
+                <span class="quiz-btn coming-soon">Coming Soon</span>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>📚 <a href="https://github.com/Grandpa-Coder/python-for-people-who-cant-code">View Source Code on GitHub</a></p>
+            <p>💡 Found a bug or have suggestions? <a href="https://github.com/Grandpa-Coder/python-for-people-who-cant-code/issues">Report it here</a></p>
+        </div>
+    </div>
+</body>
+</html>
