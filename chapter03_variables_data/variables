@@ -1,0 +1,12 @@
+# Store the price of a product as a decimal number
+product_price = 15.50
+
+# Store the name of a product as text
+product_name = "Coffee Mug"
+
+# Indicate if the product is currently in stock
+in_stock = True
+
+print(product_price)
+print(product_name)
+print(in_stock)
