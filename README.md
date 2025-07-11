@@ -39,6 +39,16 @@ Test your knowledge with interactive quizzes and practice exercises:
 
 ---
 
+
+## 🔒 Read-Only Access Notice
+
+This repository is **read-only** for readers of the book.
+
+- You are welcome to **view**, **download**, or **clone** the code.
+- Please **do not attempt to create pull requests or suggest changes**.
+- The code is maintained by the author to match the content in the book.
+- For questions or feedback, please use the contact options provided in the book or on the [official resource site](https://grandpa-coder.github.io/python-for-people-who-cant-code).
+
 ## 🚀 How to Use This Repo
 
 1. Download or clone this repo:
