@@ -30,7 +30,7 @@ Test your knowledge with interactive quizzes and practice exercises:
 
 | Chapter | Folder | Description | Interactive Quiz |
 |--------|--------|-------------|------------------|
-| 2 | `chapter02_setup/` | Getting Python Ready for Action | Coming Soon |
+| 2 | `chapter02_setup/` | Getting Python Ready for Action ||
 | 3 | `chapter03_variables_data/` | The Very Basics: Variables & Data | [📝 Quiz](https://grandpa-coder.github.io/python-for-people-who-cant-code/resources/chapter3-quiz.html) |
 | 4 | `chapter04_if_else/` | Making Decisions: If/Else | [📝 Quiz](https://grandpa-coder.github.io/python-for-people-who-cant-code/resources/chapter4-quiz.html) | 
 | 5 | `chapter05_loops/` | Repeating Actions: Loops | [📝 Quiz](https://grandpa-coder.github.io/python-for-people-who-cant-code/resources/chapter5-quiz.html) |
