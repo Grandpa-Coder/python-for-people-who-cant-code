@@ -33,7 +33,7 @@ Test your knowledge with interactive quizzes and practice exercises:
 | 4 | `chapter04_if_else/` | Making Decisions: If/Else | [📝 Quiz](https://grandpa-coder.github.io/python-for-people-who-cant-code/resources/chapter4-quiz.html) | 
 | 5 | `chapter05_loops/` | Repeating Actions: Loops | [📝 Quiz](https://grandpa-coder.github.io/python-for-people-who-cant-code/resources/chapter5-quiz.html) |
 | 6 | `chapter06_problem_solver/` | Your Daily Problem Solver | [📝 Quiz](https://grandpa-coder.github.io/python-for-people-who-cant-code/resources/chapter6-quiz.html) |
-| 7 | `chapter07_files/` | Working with Files | Coming Soon | [📝 Quiz](https://grandpa-coder.github.io/python-for-people-who-cant-code/resources/chapter7-quiz.html) |
+| 7 | `chapter07_files/` | Working with Files | [📝 Quiz](https://grandpa-coder.github.io/python-for-people-who-cant-code/resources/chapter7-quiz.html) |
 | 8 | `chapter08_lists_dicts/` | Handling Lists & Dictionaries | Coming Soon |
 | 9 | `chapter09_automation/` | Your First Automation Adventures | Coming Soon |
 
