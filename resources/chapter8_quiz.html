@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 8: Lists & Dictionaries Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .quiz-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .question h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            list-style: none;
+        }
+
+        .options li {
+            margin: 10px 0;
+            padding: 10px 15px;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .options li:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .options li.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .options li.correct {
+            background: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+
+        .options li.incorrect {
+            background: #dc3545;
+            border-color: #dc3545;
+            color: white;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+            font-size: 0.9em;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            min-width: 80px;
+            padding: 5px 10px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            background: white;
+            font-family: 'Courier New', monospace;
+        }
+
+        .controls {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .score-display {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .explanation {
+            background: #e8f4f8;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .warning-zone {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .highlight {
+            background: #fffbf0;
+            border-left: 4px solid #f39c12;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Chapter 8: Lists & Dictionaries</h1>
+            <p>Test your understanding of Python's organizational superpowers!</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <!-- Lists Basics -->
+        <div class="quiz-section">
+            <div class="section-title">📝 Lists: Your Digital Shopping List</div>
+            
+            <div class="question" data-question="1">
+                <h3>1. What are lists best used for in Python?</h3>
+                <ul class="options">
+                    <li data-answer="a">Storing a single piece of information</li>
+                    <li data-answer="b">Storing ordered collections of items</li>
+                    <li data-answer="c">Making decisions in code</li>
+                    <li data-answer="d">Creating loops</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> Lists are perfect for storing ordered collections of items, like a shopping list where order matters or a sequence of steps.
+                </div>
+            </div>
+
+            <div class="question" data-question="2">
+                <h3>2. How do you create an empty list in Python?</h3>
+                <ul class="options">
+                    <li data-answer="a">list = ()</li>
+                    <li data-answer="b">list = []</li>
+                    <li data-answer="c">list = {}</li>
+                    <li data-answer="d">list = ""</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> Square brackets [] create a list. Empty square brackets create an empty list, ready to have items added to it.
+                </div>
+            </div>
+
+            <div class="question" data-question="3">
+                <h3>3. What's unusual about Python's list indexing?</h3>
+                <ul class="options">
+                    <li data-answer="a">It starts counting from 1</li>
+                    <li data-answer="b">It starts counting from 0</li>
+                    <li data-answer="c">It counts backwards</li>
+                    <li data-answer="d">It uses letters instead of numbers</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> Python starts counting from 0, so the first item is at position 0, second at position 1, and so on. Yes, it's weird, but you'll get used to it!
+                </div>
+            </div>
+
+            <div class="question" data-question="4">
+                <h3>4. What does the .append() method do?</h3>
+                <ul class="options">
+                    <li data-answer="a">Removes the last item from a list</li>
+                    <li data-answer="b">Adds an item to the end of a list</li>
+                    <li data-answer="c">Sorts the list alphabetically</li>
+                    <li data-answer="d">Counts the items in a list</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> .append() adds a new item to the end of your list, like writing "chocolate" at the bottom of your grocery list.
+                </div>
+            </div>
+
+            <div class="question" data-question="5">
+                <h3>5. What will this code output?</h3>
+                <div class="code-block">grocery_list = ["milk", "eggs", "bread"]
+print(grocery_list[1])</div>
+                <ul class="options">
+                    <li data-answer="a">milk</li>
+                    <li data-answer="b">eggs</li>
+                    <li data-answer="c">bread</li>
+                    <li data-answer="d">An error</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> Since Python starts counting from 0, position [1] is the second item, which is "eggs".
+                </div>
+            </div>
+        </div>
+
+        <!-- List Operations -->
+        <div class="quiz-section">
+            <div class="section-title">🛠️ List Operations</div>
+            
+            <div class="question" data-question="6">
+                <h3>6. How do you find out how many items are in a list?</h3>
+                <ul class="options">
+                    <li data-answer="a">list.count()</li>
+                    <li data-answer="b">len(list)</li>
+                    <li data-answer="c">list.size()</li>
+                    <li data-answer="d">list.length()</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> len() tells you how many items are in your list. Very handy when you need to know if your to-do list is getting out of hand!
+                </div>
+            </div>
+
+            <div class="question" data-question="7">
+                <h3>7. What happens when you use .remove() on a list?</h3>
+                <ul class="options">
+                    <li data-answer="a">It removes the first item</li>
+                    <li data-answer="b">It removes the last item</li>
+                    <li data-answer="c">It removes the first occurrence of a specified value</li>
+                    <li data-answer="d">It removes all items</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> .remove() finds the first occurrence of the value you specify and removes it, like saying "remove milk from my shopping list".
+                </div>
+            </div>
+
+            <div class="question" data-question="8">
+                <h3>8. What's the difference between .remove() and del?</h3>
+                <ul class="options">
+                    <li data-answer="a">There's no difference</li>
+                    <li data-answer="b">.remove() removes by value, del removes by position</li>
+                    <li data-answer="c">del removes by value, .remove() removes by position</li>
+                    <li data-answer="d">del is faster than .remove()</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> .remove() says "remove Ben" (by value) while del says "remove whoever's first" (by position).
+                </div>
+            </div>
+        </div>
+
+        <!-- Tuples -->
+        <div class="quiz-section">
+            <div class="section-title">🔒 Tuples: Fixed Collections</div>
+            
+            <div class="question" data-question="9">
+                <h3>9. What's the main difference between lists and tuples?</h3>
+                <ul class="options">
+                    <li data-answer="a">Tuples are faster than lists</li>
+                    <li data-answer="b">Tuples can't be changed after creation</li>
+                    <li data-answer="c">Lists can store more items</li>
+                    <li data-answer="d">Tuples use square brackets</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> Tuples are immutable - once created, they can't be changed. Think of them as writing your list in permanent marker instead of pencil.
+                </div>
+            </div>
+
+            <div class="question" data-question="10">
+                <h3>10. How do you create a tuple?</h3>
+                <ul class="options">
+                    <li data-answer="a">Using square brackets []</li>
+                    <li data-answer="b">Using parentheses ()</li>
+                    <li data-answer="c">Using curly braces {}</li>
+                    <li data-answer="d">Using quotation marks ""</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> Tuples use parentheses (), while lists use square brackets [] and dictionaries use curly braces {}.
+                </div>
+            </div>
+
+            <div class="question" data-question="11">
+                <h3>11. When should you use a tuple instead of a list?</h3>
+                <ul class="options">
+                    <li data-answer="a">When you need to store a lot of data</li>
+                    <li data-answer="b">When the data should not be modified</li>
+                    <li data-answer="c">When you need to sort the data</li>
+                    <li data-answer="d">When you need to add items frequently</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> Use tuples when the data should not be modified, like days of the week or coordinates. They're the "safety lock" version of lists.
+                </div>
+            </div>
+        </div>
+
+        <!-- Dictionaries Basics -->
+        <div class="quiz-section">
+            <div class="section-title">📖 Dictionaries: Key-Value Pairs</div>
+            
+            <div class="question" data-question="12">
+                <h3>12. What's the best analogy for a dictionary?</h3>
+                <ul class="options">
+                    <li data-answer="a">A shopping list</li>
+                    <li data-answer="b">A contact book or filing system</li>
+                    <li data-answer="c">A math calculator</li>
+                    <li data-answer="d">A clock</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> Dictionaries are like contact books - you access information by meaningful names (keys) rather than positions.
+                </div>
+            </div>
+
+            <div class="question" data-question="13">
+                <h3>13. How do you create a dictionary in Python?</h3>
+                <ul class="options">
+                    <li data-answer="a">Using square brackets []</li>
+                    <li data-answer="b">Using parentheses ()</li>
+                    <li data-answer="c">Using curly braces {}</li>
+                    <li data-answer="d">Using quotation marks ""</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> Dictionaries use curly braces {} to group key-value pairs together.
+                </div>
+            </div>
+
+            <div class="question" data-question="14">
+                <h3>14. What will this code output?</h3>
+                <div class="code-block">person = {"name": "Alex", "age": 30}
+print(person["name"])</div>
+                <ul class="options">
+                    <li data-answer="a">Alex</li>
+                    <li data-answer="b">name</li>
+                    <li data-answer="c">30</li>
+                    <li data-answer="d">An error</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> person["name"] accesses the value associated with the key "name", which is "Alex".
+                </div>
+            </div>
+
+            <div class="question" data-question="15">
+                <h3>15. What's the advantage of using person["name"] over person[0]?</h3>
+                <ul class="options">
+                    <li data-answer="a">It's faster</li>
+                    <li data-answer="b">It's more readable and self-documenting</li>
+                    <li data-answer="c">It uses less memory</li>
+                    <li data-answer="d">It prevents errors</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> person["name"] immediately tells you what you're getting, while person[0] requires you to remember what's at position 0.
+                </div>
+            </div>
+        </div>
+
+        <!-- Dictionary Operations -->
+        <div class="quiz-section">
+            <div class="section-title">🔧 Dictionary Operations</div>
+            
+            <div class="question" data-question="16">
+                <h3>16. How do you check if a key exists in a dictionary before accessing it?</h3>
+                <ul class="options">
+                    <li data-answer="a">if key exists in dict:</li>
+                    <li data-answer="b">if key in dict:</li>
+                    <li data-answer="c">if dict.has(key):</li>
+                    <li data-answer="d">if dict[key] != None:</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> Use "if key in dict:" to check if a key exists before accessing it, like checking if a contact card has an email field.
+                </div>
+            </div>
+
+            <div class="question" data-question="17">
+                <h3>17. What does the .get() method do?</h3>
+                <ul class="options">
+                    <li data-answer="a">Always returns the value for a key</li>
+                    <li data-answer="b">Returns the value if the key exists, or None if it doesn't</li>
+                    <li data-answer="c">Adds a new key-value pair</li>
+                    <li data-answer="d">Removes a key-value pair</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> .get() is like a polite assistant - it gives you the value if it exists, or returns None instead of causing an error.
+                </div>
+            </div>
+
+            <div class="question" data-question="18">
+                <h3>18. What happens if you try to access a dictionary key that doesn't exist?</h3>
+                <ul class="options">
+                    <li data-answer="a">It returns None</li>
+                    <li data-answer="b">It returns an empty string</li>
+                    <li data-answer="c">It causes a KeyError</li>
+                    <li data-answer="d">It creates the key automatically</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> Python raises a KeyError, basically saying "Hey, you asked for a key that doesn't exist!" This is why checking with 'in' or using .get() is safer.
+                </div>
+            </div>
+        </div>
+
+        <!-- Practical Applications -->
+        <div class="quiz-section">
+            <div class="section-title">🎯 Practical Applications</div>
+            
+            <div class="question" data-question="19">
+                <h3>19. Which is better for storing customer information?</h3>
+                <div class="highlight">
+                    <p><strong>Scenario:</strong> You need to store customer details like name, phone, email, and city.</p>
+                </div>
+                <ul class="options">
+                    <li data-answer="a">A list: ["John", "123-456-7890", "john@email.com", "Boston"]</li>
+                    <li data-answer="b">A dictionary: {"name": "John", "phone": "123-456-7890", "email": "john@email.com", "city": "Boston"}</li>
+                    <li data-answer="c">Separate variables for each piece of information</li>
+                    <li data-answer="d">A tuple: ("John", "123-456-7890", "john@email.com", "Boston")</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> A dictionary is perfect because it clearly labels each piece of information and allows easy access by meaningful names.
+                </div>
+            </div>
+
+            <div class="question" data-question="20">
+                <h3>20. What's the best way to store a product inventory?</h3>
+                <div class="highlight">
+                    <p><strong>Scenario:</strong> You have multiple products, each with name, price, and stock quantity.</p>
+                </div>
+                <ul class="options">
+                    <li data-answer="a">Three separate lists: names, prices, stock</li>
+                    <li data-answer="b">A list of dictionaries</li>
+                    <li data-answer="c">A dictionary of lists</li>
+                    <li data-answer="d">One big dictionary</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> A list of dictionaries is perfect - each product is a dictionary with its details, and all products are in an ordered list.
+                </div>
+            </div>
+        </div>
+
+        <!-- Fill in the Blanks -->
+        <div class="quiz-section">
+            <div class="section-title">✏️ Fill in the Blanks</div>
+            
+            <div class="question" data-question="21">
+                <h3>21. Complete this contact management code:</h3>
+                <div class="code-block">contacts = []
+new_contact = <input type="text" class="fill-blank" id="blank1" placeholder="?" style="width: 40px;">"name"<input type="text" class="fill-blank" id="blank2" placeholder="?" style="width: 40px;"> "Alice", "phone"<input type="text" class="fill-blank" id="blank3" placeholder="?" style="width: 40px;"> "555-1234"<input type="text" class="fill-blank" id="blank4" placeholder="?" style="width: 40px;">
+contacts<input type="text" class="fill-blank" id="blank5" placeholder="????????" style="width: 80px;">(new_contact)</div>
+                <p><strong>Fill in:</strong> The symbols and method needed to create a dictionary and add it to a list.</p>
+                <button class="btn" onclick="checkFillBlanks()">Check Answers</button>
+                <div class="explanation" id="fillBlankExplanation">
+                    Correct answers: "{", ":", ":", "}", ".append" - This creates a dictionary with key-value pairs and adds it to the contacts list.
+                </div>
+            </div>
+        </div>
+
+        <!-- True/False -->
+        <div class="quiz-section">
+            <div class="section-title">✅ True or False</div>
+            
+            <div class="question" data-question="22">
+                <h3>22. You can change the values in a dictionary after it's created.</h3>
+                <ul class="options">
+                    <li data-answer="a">True</li>
+                    <li data-answer="b">False</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> True! Unlike tuples, dictionaries are mutable - you can add, update, or remove key-value pairs.
+                </div>
+            </div>
+
+            <div class="question" data-question="23">
+                <h3>23. Lists and dictionaries can both store multiple types of data.</h3>
+                <ul class="options">
+                    <li data-answer="a">True</li>
+                    <li data-answer="b">False</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> True! Both lists and dictionaries can store strings, numbers, other lists, dictionaries, and more - all in the same collection.
+                </div>
+            </div>
+
+            <div class="question" data-question="24">
+                <h3>24. Dictionary keys must be unique.</h3>
+                <ul class="options">
+                    <li data-answer="a">True</li>
+                    <li data-answer="b">False</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> True! Each key in a dictionary must be unique, just like each contact in your phone can only have one entry.
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn" onclick="checkAllAnswers()">Check All Answers</button>
+            <button class="btn" onclick="resetQuiz()">Reset Quiz</button>
+        </div>
+
+        <div class="score-display" id="scoreDisplay">
+            <h3>🎉 Quiz Complete!</h3>
+            <p id="scoreText">Your Score: 0/24</p>
+            <p id="performanceText">Keep practicing!</p>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            1: 'b', 2: 'b', 3: 'b', 4: 'b', 5: 'b',
+            6: 'b', 7: 'c', 8: 'b', 9: 'b', 10: 'b',
+            11: 'b', 12: 'b', 13: 'c', 14: 'a', 15: 'b',
+            16: 'b', 17: 'b', 18: 'c', 19: 'b', 20: 'b',
+            22: 'a', 23: 'a', 24: 'a'
+        };
+
+        let currentScore = 0;
+        let totalQuestions = 24;
+        let answeredQuestions = new Set();
+
+        function selectAnswer(questionNum, selectedLi) {
+            const question = document.querySelector(`[data-question="${questionNum}"]`);
+            const options = question.querySelectorAll('.options li');
+            
+            // Remove previous selections
+            options.forEach(li => {
+                li.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            // Mark selected answer
+            selectedLi.classList.add('selected');
+            
+            // Store the answer
+            const answer = selectedLi.dataset.answer;
+            question.dataset.selectedAnswer = answer;
+            
+            updateProgress();
+        }
+
+        function checkFillBlanks() {
+            const blank1 = document.getElementById('blank1').value.trim();
+            const blank2 = document.getElementById('blank2').value.trim();
+            const blank3 = document.getElementById('blank3').value.trim();
+            const blank4 = document.getElementById('blank4').value.trim();
+            const blank5 = document.getElementById('blank5').value.trim();
+            
+            let isCorrect = true;
+            
+            if (blank1 !== '{') isCorrect = false;
+            if (blank2 !== ':') isCorrect = false;
+            if (blank3 !== ':') isCorrect = false;
+            if (blank4 !== '}') isCorrect = false;
+            if (blank5 !== '.append') isCorrect = false;
+            
+            const explanation = document.getElementById('fillBlankExplanation');
+            explanation.style.display = 'block';
+            
+            if (isCorrect) {
+                explanation.style.background = '#d4edda';
+                explanation.style.borderColor = '#28a745';
+                if (!answeredQuestions.has(21)) {
+                    currentScore++;
+                    answeredQuestions.add(21);
+                }
+            } else {
+                explanation.style.background = '#f8d7da';
+                explanation.style.borderColor = '#dc3545';
+            }
+            
+            updateProgress();
+        }
+
+        function checkAllAnswers() {
+            let score = 0;
+            
+            // Check multiple choice and true/false questions
+            for (let i = 1; i <= 24; i++) {
+                if (i === 21) continue; // Skip fill-in-the-blank
+                
+                const question = document.querySelector(`[data-question="${i}"]`);
+                if (!question) continue;
+                
+                const selectedAnswer = question.dataset.selectedAnswer;
+                const correctAnswer = correctAnswers[i];
+                const options = question.querySelectorAll('.options li');
+                
+                options.forEach(li => {
+                    const answer = li.dataset.answer;
+                    li.classList.remove('selected');
+                    
+                    if (answer === correctAnswer) {
+                        li.classList.add('correct');
+                    } else if (answer === selectedAnswer && answer !== correctAnswer) {
+                        li.classList.add('incorrect');
+                    }
+                });
+                
+                if (selectedAnswer === correctAnswer) {
+                    score++;
+                }
+                
+                // Show explanation
+                const explanation = question.querySelector('.explanation');
+                if (explanation) {
+                    explanation.style.display = 'block';
+                }
+            }
+            
+            // Add fill-in-the-blank score if already checked
+            if (answeredQuestions.has(21)) {
+                score++;
+            }
+            
+            currentScore = score;
+            showScore();
+        }
+
+        function showScore() {
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const scoreText = document.getElementById('scoreText');
+            const performanceText = document.getElementById('performanceText');
+            
+            scoreText.textContent = `Your Score: ${currentScore}/${totalQuestions}`;
+            
+            const percentage = (currentScore / totalQuestions) * 100;
+            if (percentage >= 90) {
+                performanceText
