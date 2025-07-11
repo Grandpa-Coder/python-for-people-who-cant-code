@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 9: Automation Adventures Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .quiz-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .question h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            list-style: none;
+        }
+
+        .options li {
+            margin: 10px 0;
+            padding: 10px 15px;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .options li:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .options li.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .options li.correct {
+            background: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+
+        .options li.incorrect {
+            background: #dc3545;
+            border-color: #dc3545;
+            color: white;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+            font-size: 0.9em;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            min-width: 80px;
+            padding: 5px 10px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            background: white;
+            font-family: 'Courier New', monospace;
+        }
+
+        .controls {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .score-display {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .explanation {
+            background: #e8f4f8;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .warning-zone {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .highlight {
+            background: #fffbf0;
+            border-left: 4px solid #f39c12;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .story-box {
+            background: #f0f8ff;
+            border-left: 4px solid #4a90e2;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-style: italic;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Chapter 9: Automation Adventures</h1>
+            <p>Test your automation superpowers and file handling skills!</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <!-- Automation Concepts -->
+        <div class="quiz-section">
+            <div class="section-title">🎯 Automation Concepts</div>
+            
+            <div class="question" data-question="1">
+                <h3>1. What is the main goal of automation in programming?</h3>
+                <ul class="options">
+                    <li data-answer="a">To make code more complex</li>
+                    <li data-answer="b">To replace humans completely</li>
+                    <li data-answer="c">To make repetitive tasks easier and faster</li>
+                    <li data-answer="d">To impress other programmers</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> Automation is about making repetitive, boring tasks easier and faster, so you can focus on more interesting work.
+                </div>
+            </div>
+
+            <div class="question" data-question="2">
+                <h3>2. According to the chapter, what makes a good automation project?</h3>
+                <ul class="options">
+                    <li data-answer="a">It should be as complex as possible</li>
+                    <li data-answer="b">It should solve a real problem you actually have</li>
+                    <li data-answer="c">It should use every Python feature available</li>
+                    <li data-answer="d">It should work only on your computer</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> The best automation projects solve real problems. Alex's invoice processing was perfect because it solved an actual Monday morning headache!
+                </div>
+            </div>
+
+            <div class="question" data-question="3">
+                <h3>3. What was Alex's main problem before automation?</h3>
+                <div class="story-box">
+                    Remember Alex's "Monday Math Marathon" with calculator-based misery?
+                </div>
+                <ul class="options">
+                    <li data-answer="a">Not knowing how to use a computer</li>
+                    <li data-answer="b">Spending hours manually adding up invoice numbers</li>
+                    <li data-answer="c">Having too many clients</li>
+                    <li data-answer="d">Forgetting to send emails</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> Alex was spending every Monday morning hunched over a calculator, adding up invoice numbers like a "medieval accountant."
+                </div>
+            </div>
+
+            <div class="question" data-question="4">
+                <h3>4. What's the difference between academic learning and practical learning?</h3>
+                <ul class="options">
+                    <li data-answer="a">Academic learning is harder</li>
+                    <li data-answer="b">Practical learning is like swimming by getting in the water</li>
+                    <li data-answer="c">Academic learning is more valuable</li>
+                    <li data-answer="d">There's no difference</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> Academic learning is like learning to swim in a classroom, while practical learning is like learning by getting in the water and actually swimming!
+                </div>
+            </div>
+        </div>
+
+        <!-- File Handling -->
+        <div class="quiz-section">
+            <div class="section-title">📁 File Handling Fundamentals</div>
+            
+            <div class="question" data-question="5">
+                <h3>5. What does the open() function do in Python?</h3>
+                <ul class="options">
+                    <li data-answer="a">Opens a new program</li>
+                    <li data-answer="b">Opens a file for reading or writing</li>
+                    <li data-answer="c">Opens a web browser</li>
+                    <li data-answer="d">Opens a calculator</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> The open() function is like opening a filing cabinet - it gives you access to a file so you can read from it or write to it.
+                </div>
+            </div>
+
+            <div class="question" data-question="6">
+                <h3>6. What does the 'r' parameter mean in open('filename.txt', 'r')?</h3>
+                <ul class="options">
+                    <li data-answer="a">Read mode - open file for reading only</li>
+                    <li data-answer="b">Run mode - execute the file</li>
+                    <li data-answer="c">Rewrite mode - replace all content</li>
+                    <li data-answer="d">Random mode - read in random order</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> The 'r' stands for "read" - it opens the file in read-only mode, perfect for when you just want to look at the contents without changing anything.
+                </div>
+            </div>
+
+            <div class="question" data-question="7">
+                <h3>7. Why is it important to use try/except with file operations?</h3>
+                <ul class="options">
+                    <li data-answer="a">It makes the code run faster</li>
+                    <li data-answer="b">Files might not exist or be accessible</li>
+                    <li data-answer="c">It's required by Python</li>
+                    <li data-answer="d">It makes the output prettier</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> Files might not exist, be locked, or have permission issues. Try/except helps your program handle these situations gracefully instead of crashing.
+                </div>
+            </div>
+
+            <div class="question" data-question="8">
+                <h3>8. What method is used to read all lines from a file?</h3>
+                <ul class="options">
+                    <li data-answer="a">file.read_all()</li>
+                    <li data-answer="b">file.readlines()</li>
+                    <li data-answer="c">file.get_lines()</li>
+                    <li data-answer="d">file.all_lines()</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> The readlines() method reads all lines from a file and returns them as a list, making it easy to process each line individually.
+                </div>
+            </div>
+        </div>
+
+        <!-- Invoice Processing Project -->
+        <div class="quiz-section">
+            <div class="section-title">🧾 The Invoice Whisperer Project</div>
+            
+            <div class="question" data-question="9">
+                <h3>9. What was the main challenge in processing the invoice file?</h3>
+                <ul class="options">
+                    <li data-answer="a">The file was too large</li>
+                    <li data-answer="b">Converting text numbers to actual numbers for math</li>
+                    <li data-answer="c">The file was encrypted</li>
+                    <li data-answer="d">The numbers were in different languages</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> When you read from a file, everything comes in as text (strings). To do math, you need to convert text like "158.80" to actual numbers using float().
+                </div>
+            </div>
+
+            <div class="question" data-question="10">
+                <h3>10. What function converts a string to a decimal number?</h3>
+                <ul class="options">
+                    <li data-answer="a">int()</li>
+                    <li data-answer="b">float()</li>
+                    <li data-answer="c">str()</li>
+                    <li data-answer="d">decimal()</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> float() converts strings like "158.80" to decimal numbers that you can use for math operations.
+                </div>
+            </div>
+
+            <div class="question" data-question="11">
+                <h3>11. What happens if you try to convert an invalid string to a number?</h3>
+                <ul class="options">
+                    <li data-answer="a">It returns 0</li>
+                    <li data-answer="b">It raises a ValueError</li>
+                    <li data-answer="c">It ignores the invalid data</li>
+                    <li data-answer="d">It converts to the closest valid number</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> If you try float("hello") or float("not-a-number"), Python raises a ValueError. This is why we use try/except blocks!
+                </div>
+            </div>
+
+            <div class="question" data-question="12">
+                <h3>12. What method removes whitespace from the beginning and end of a string?</h3>
+                <ul class="options">
+                    <li data-answer="a">clean()</li>
+                    <li data-answer="b">strip()</li>
+                    <li data-answer="c">remove()</li>
+                    <li data-answer="d">trim()</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> The strip() method removes whitespace (spaces, tabs, newlines) from both ends of a string, cleaning up data from files.
+                </div>
+            </div>
+        </div>
+
+        <!-- Email Automation Project -->
+        <div class="quiz-section">
+            <div class="section-title">📧 The Email Butler Project</div>
+            
+            <div class="question" data-question="13">
+                <h3>13. What's the main advantage of the email automation approach?</h3>
+                <ul class="options">
+                    <li data-answer="a">It sends emails faster</li>
+                    <li data-answer="b">It personalizes messages and prevents copy-paste errors</li>
+                    <li data-answer="c">It uses less internet bandwidth</li>
+                    <li data-answer="d">It makes emails look more professional</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> The automation prevents embarrassing mistakes like sending "Dear [CLIENT NAME]" and ensures every email is properly personalized.
+                </div>
+            </div>
+
+            <div class="question" data-question="14">
+                <h3>14. What separator is used in the recipients.txt file?</h3>
+                <div class="code-block">John Doe,john.doe@example.com
+Jane Smith,jane.smith@example.com</div>
+                <ul class="options">
+                    <li data-answer="a">Semicolon (;)</li>
+                    <li data-answer="b">Comma (,)</li>
+                    <li data-answer="c">Pipe (|)</li>
+                    <li data-answer="d">Tab character</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> The comma separates the name from the email address in each line of the recipients file.
+                </div>
+            </div>
+
+            <div class="question" data-question="15">
+                <h3>15. What does the split() method do?</h3>
+                <ul class="options">
+                    <li data-answer="a">Divides numbers by 2</li>
+                    <li data-answer="b">Breaks a string into parts based on a separator</li>
+                    <li data-answer="c">Removes characters from a string</li>
+                    <li data-answer="d">Creates duplicate strings</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> split(',') takes a string like "John Doe,john@example.com" and breaks it into ["John Doe", "john@example.com"] at the comma.
+                </div>
+            </div>
+
+            <div class="question" data-question="16">
+                <h3>16. Why does the email project show emails instead of actually sending them?</h3>
+                <ul class="options">
+                    <li data-answer="a">Sending emails is too complicated</li>
+                    <li data-answer="b">To avoid accidentally spamming people while learning</li>
+                    <li data-answer="c">Email sending doesn't work in Python</li>
+                    <li data-answer="d">It's faster to just display them</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> When learning, it's safer to see what the emails would look like rather than risk accidentally sending test emails to real people!
+                </div>
+            </div>
+        </div>
+
+        <!-- Problem-Solving Skills -->
+        <div class="quiz-section">
+            <div class="section-title">🧠 Problem-Solving Skills</div>
+            
+            <div class="question" data-question="17">
+                <h3>17. What are the three "magic ingredients" mentioned in the chapter?</h3>
+                <ul class="options">
+                    <li data-answer="a">Speed, accuracy, and efficiency</li>
+                    <li data-answer="b">Breaking down problems, handling errors, making it user-friendly</li>
+                    <li data-answer="c">Reading, writing, and calculating</li>
+                    <li data-answer="d">Functions, loops, and variables</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> The three magic ingredients are: 1) Breaking down problems into smaller pieces, 2) Handling the unexpected gracefully, and 3) Making it human-friendly with good messages.
+                </div>
+            </div>
+
+            <div class="question" data-question="18">
+                <h3>18. What's the first step in automating any task?</h3>
+                <ul class="options">
+                    <li data-answer="a">Write the code immediately</li>
+                    <li data-answer="b">Break down the problem into smaller steps</li>
+                    <li data-answer="c">Choose the best programming language</li>
+                    <li data-answer="d">Buy better computer equipment</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> Before writing any code, you need to break down what you want to accomplish into smaller, manageable steps.
+                </div>
+            </div>
+
+            <div class="question" data-question="19">
+                <h3>19. How did Alex's Monday routine change after automation?</h3>
+                <ul class="options">
+                    <li data-answer="a">It took longer but was more accurate</li>
+                    <li data-answer="b">It went from 1 hour to 3 seconds</li>
+                    <li data-answer="c">It stayed the same but was less stressful</li>
+                    <li data-answer="d">It required more coffee</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> Alex's invoice processing went from taking an hour with a calculator to taking just 3 seconds with Python automation!
+                </div>
+            </div>
+
+            <div class="question" data-question="20">
+                <h3>20. What happens after someone gets their first taste of automation?</h3>
+                <ul class="options">
+                    <li data-answer="a">They usually stop there</li>
+                    <li data-answer="b">They start looking for more things to automate</li>
+                    <li data-answer="c">They become scared of technology</li>
+                    <li data-answer="d">They go back to doing things manually</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> Automation is like eating potato chips - once you start, it's hard to stop! Alex started looking for more things to automate after the first success.
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Analysis -->
+        <div class="quiz-section">
+            <div class="section-title">🔍 Code Analysis</div>
+            
+            <div class="question" data-question="21">
+                <h3>21. What will this code do?</h3>
+                <div class="code-block">with open('invoices.txt', 'r') as file:
+    lines = file.readlines()
+    total = 0
+    for line in lines:
+        amount = float(line.strip())
+        total += amount
+    print(f"Total: ${total:.2f}")</div>
+                <ul class="options">
+                    <li data-answer="a">Create a new invoice file</li>
+                    <li data-answer="b">Read invoice amounts and calculate the total</li>
+                    <li data-answer="c">Delete all invoices</li>
+                    <li data-answer="d">Send invoices by email</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> This code opens the invoice file, reads each line, converts the text to numbers, adds them up, and displays the total formatted as currency.
+                </div>
+            </div>
+
+            <div class="question" data-question="22">
+                <h3>22. What does the .2f in the print statement do?</h3>
+                <ul class="options">
+                    <li data-answer="a">Rounds to 2 decimal places</li>
+                    <li data-answer="b">Multiplies by 2</li>
+                    <li data-answer="c">Divides by 2</li>
+                    <li data-answer="d">Adds 2 to the number</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> The .2f format specifier displays the number with exactly 2 decimal places, perfect for currency formatting like $123.45.
+                </div>
+            </div>
+
+            <div class="question" data-question="23">
+                <h3>23. What's the purpose of the 'with' statement in file handling?</h3>
+                <ul class="options">
+                    <li data-answer="a">It makes the code run faster</li>
+                    <li data-answer="b">It automatically closes the file when done</li>
+                    <li data-answer="c">It prevents errors</li>
+                    <li data-answer="d">It makes the code more readable</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> The 'with' statement ensures that the file is properly closed when you're done with it, even if an error occurs.
+                </div>
+            </div>
+        </div>
+
+        <!-- Fill in the Blanks -->
+        <div class="quiz-section">
+            <div class="section-title">✏️ Fill in the Blanks</div>
+            
+            <div class="question" data-question="24">
+                <h3>24. Complete this file processing code:</h3>
+                <div class="code-block">try:
+    <input type="text" class="fill-blank" id="blank1" placeholder="????" style="width: 60px;"> open('data.txt', <input type="text" class="fill-blank" id="blank2" placeholder="?" style="width: 30px;">) as file:
+        lines = file.<input type="text" class="fill-blank" id="blank3" placeholder="?????????" style="width: 80px;">()
+        for line in lines:
+            clean_line = line.<input type="text" class="fill-blank" id="blank4" placeholder="?????" style="width: 60px;">()
+            number = <input type="text" class="fill-blank" id="blank5" placeholder="????" style="width: 50px;">(clean_line)
+except FileNotFoundError:
+    print("File not found!")</div>
+                <button class="btn" onclick="checkFillBlanks()">Check Answers</button>
+                <div class="explanation" id="fillBlankExplanation">
+                    Correct answers: "with", "r", "readlines", "strip", "float" - This safely opens a file, reads all lines, cleans whitespace, and converts to numbers.
+                </div>
+            </div>
+        </div>
+
+        <!-- True/False -->
+        <div class="quiz-section">
+            <div class="section-title">✅ True or False</div>
+            
+            <div class="question" data-question="25">
+                <h3>25. Professional programmers write all their code from scratch.</h3>
+                <ul class="options">
+                    <li data-answer="a">True</li>
+                    <li data-answer="b">False</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> False! Professional programmers copy and modify existing code all the time. It's not cheating - it's being smart and efficient!
+                </div>
+            </div>
+
+            <div class="question" data-question="26">
+                <h3>26. Automation is only useful for large businesses.</h3>
+                <ul class="options">
+                    <li data-answer="a">True</li>
+                    <li data-answer="b">False</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> False! Automation is incredibly useful for individuals and small businesses. Even personal tasks like organizing photos or managing expenses can be automated.
+                </div>
+            </div>
+
+            <div class="question" data-question="27">
+                <h3>27. The best automation projects solve real problems you actually have.</h3>
+                <ul class="options">
+                    <li data-answer="a">True</li>
+                    <li data-answer="b">False</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> True! The most successful automation projects are those that solve actual problems in your daily life or work, not just theoretical exercises.
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn" onclick="checkAllAnswers()">Check All Answers</button>
+            <button class="btn" onclick="resetQuiz()">Reset Quiz</button>
+        </div>
+
+        <div class="score-display" id="scoreDisplay">
+            <h3>🎉 Quiz Complete!</h3>
+            <p id="scoreText">Your Score: 0/27</p>
+            <p id="performanceText">Keep practicing!</p>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            1: 'c', 2: 'b', 3: 'b', 4: 'b', 5: 'b',
+            6: 'a', 7: 'b', 8: 'b', 9: 'b', 10: 'b',
+            11: 'b', 12: 'b', 13: 'b', 14: 'b', 15: 'b',
+            16: 'b', 17: 'b', 18: 'b', 19: 'b', 20: 'b',
+            21: 'b', 22: 'a', 23: 'b', 25: 'b', 26: 'b', 27: 'a'
+        };
+
+        let currentScore = 0;
+        let totalQuestions = 27;
+        let answeredQuestions = new Set();
+
+        function selectAnswer(questionNum, selectedLi) {
+            const question = document.querySelector(`[data-question="${questionNum}"]`);
+            const options = question.querySelectorAll('.options li');
+            
+            // Remove previous selections
+            options.forEach(li => {
+                li.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            // Mark selected answer
+            selectedLi.classList.add('selected');
+            
+            // Store the answer
+            const answer = selectedLi.dataset.answer;
+            question.dataset.selectedAnswer = answer;
+            
+            updateProgress();
+        }
+
+        function checkFillBlanks() {
+            const blank1 = document.getElementById('blank1').value.trim();
+            const blank2 = document.getElementById('blank2').value.trim();
+            const blank3 = document.getElementById('blank3').value.trim();
+            const blank4 = document.getElementById('blank4').value.trim();
+            const blank5 = document.getElementById('blank5').value.trim();
+            
+            let isCorrect = true;
+            
+            if (blank1 !== 'with') isCorrect = false;
