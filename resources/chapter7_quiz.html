@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7: Files Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .quiz-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .question h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .options {
+            list-style: none;
+        }
+
+        .options li {
+            margin: 10px 0;
+            padding: 10px 15px;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .options li:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .options li.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .options li.correct {
+            background: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+
+        .options li.incorrect {
+            background: #dc3545;
+            border-color: #dc3545;
+            color: white;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            min-width: 100px;
+            padding: 5px 10px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            background: white;
+            font-family: 'Courier New', monospace;
+        }
+
+        .controls {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .score-display {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .explanation {
+            background: #e8f4f8;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📁 Chapter 7: Files - Teaching Your Computer to Read and Write</h1>
+            <p>Test your understanding of file handling in Python!</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <!-- File Basics -->
+        <div class="quiz-section">
+            <div class="section-title">📂 File Basics</div>
+            
+            <div class="question" data-question="1">
+                <h3>1. Why is working with files important in Python?</h3>
+                <ul class="options">
+                    <li data-answer="a">Files make programs run faster</li>
+                    <li data-answer="b">Files allow programs to store and retrieve real business data</li>
+                    <li data-answer="c">Files are required for all Python programs</li>
+                    <li data-answer="d">Files automatically fix programming errors</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> Files allow your programs to work with real business data like customer lists, sales records, and reports - making your automation truly useful.
+                </div>
+            </div>
+
+            <div class="question" data-question="2">
+                <h3>2. What function do you use to open a file in Python?</h3>
+                <ul class="options">
+                    <li data-answer="a">file()</li>
+                    <li data-answer="b">open()</li>
+                    <li data-answer="c">read()</li>
+                    <li data-answer="d">load()</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> The open() function is like asking for the key to a specific room - you tell Python which file you want to access.
+                </div>
+            </div>
+
+            <div class="question" data-question="3">
+                <h3>3. Where should you put your .txt files to avoid "FileNotFoundError"?</h3>
+                <ul class="options">
+                    <li data-answer="a">Anywhere on your computer</li>
+                    <li data-answer="b">In the same folder as your Python script</li>
+                    <li data-answer="c">In a special Python folder</li>
+                    <li data-answer="d">On your desktop</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> Keep your .txt files in the same folder as your Python script - like keeping your coffee mug next to your coffee maker!
+                </div>
+            </div>
+        </div>
+
+        <!-- File Modes -->
+        <div class="quiz-section">
+            <div class="section-title">🔑 File Modes - The Three Keys</div>
+            
+            <div class="question" data-question="4">
+                <h3>4. What does the 'r' mode do when opening a file?</h3>
+                <ul class="options">
+                    <li data-answer="a">Removes the file</li>
+                    <li data-answer="b">Reads the file (like browsing a catalog)</li>
+                    <li data-answer="c">Renames the file</li>
+                    <li data-answer="d">Replaces the file</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> The 'r' mode means "read" - you're just looking at what's inside the file, like browsing a catalog.
+                </div>
+            </div>
+
+            <div class="question" data-question="5">
+                <h3>5. What happens when you open a file with 'w' mode?</h3>
+                <ul class="options">
+                    <li data-answer="a">It adds to the end of the file</li>
+                    <li data-answer="b">It creates a new file and erases any existing content</li>
+                    <li data-answer="c">It only reads the file</li>
+                    <li data-answer="d">It makes the file write-protected</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> The 'w' mode is like using a fresh piece of paper - it erases what was there before and starts new.
+                </div>
+            </div>
+
+            <div class="question" data-question="6">
+                <h3>6. What does 'a' mode do?</h3>
+                <ul class="options">
+                    <li data-answer="a">Allows reading only</li>
+                    <li data-answer="b">Automatically saves the file</li>
+                    <li data-answer="c">Appends new content to the end of the file</li>
+                    <li data-answer="d">Activates the file</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> The 'a' mode appends content to the end of the file, like adding a new entry to your diary.
+                </div>
+            </div>
+        </div>
+
+        <!-- with open() Statement -->
+        <div class="quiz-section">
+            <div class="section-title">🤝 The Magic of 'with open()'</div>
+            
+            <div class="question" data-question="7">
+                <h3>7. Why is "with open(...) as f:" better than just using "open()"?</h3>
+                <ul class="options">
+                    <li data-answer="a">It's faster</li>
+                    <li data-answer="b">It automatically closes the file when done</li>
+                    <li data-answer="c">It uses less memory</li>
+                    <li data-answer="d">It prevents file corruption</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> "with open()" is like having a responsible friend who always locks the door behind you - it ensures the file is properly closed.
+                </div>
+            </div>
+
+            <div class="question" data-question="8">
+                <h3>8. What does the "as f:" part do in "with open('file.txt', 'r') as f:"?</h3>
+                <ul class="options">
+                    <li data-answer="a">It creates a variable 'f' to represent the file</li>
+                    <li data-answer="b">It formats the file</li>
+                    <li data-answer="c">It filters the file content</li>
+                    <li data-answer="d">It makes the file faster</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> The "as f:" creates a variable 'f' that represents the opened file, so you can use f.read(), f.write(), etc.
+                </div>
+            </div>
+        </div>
+
+        <!-- Reading Files -->
+        <div class="quiz-section">
+            <div class="section-title">📖 Reading Files</div>
+            
+            <div class="question" data-question="9">
+                <h3>9. What does .read() do?</h3>
+                <ul class="options">
+                    <li data-answer="a">Reads only the first line</li>
+                    <li data-answer="b">Reads the entire file content at once</li>
+                    <li data-answer="c">Reads one character at a time</li>
+                    <li data-answer="d">Reads only numbers from the file</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> .read() reads the entire file content at once, like reading a whole letter from start to finish.
+                </div>
+            </div>
+
+            <div class="question" data-question="10">
+                <h3>10. What does .strip() do when reading file lines?</h3>
+                <ul class="options">
+                    <li data-answer="a">Removes the file</li>
+                    <li data-answer="b">Removes invisible characters like extra spaces and newlines</li>
+                    <li data-answer="c">Makes text lowercase</li>
+                    <li data-answer="d">Counts the characters</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> .strip() is like a digital lint roller - it removes invisible characters from the start and end of text.
+                </div>
+            </div>
+
+            <div class="question" data-question="11">
+                <h3>11. How do you read a file line by line?</h3>
+                <ul class="options">
+                    <li data-answer="a">Use a for loop: for line in f:</li>
+                    <li data-answer="b">Use while True:</li>
+                    <li data-answer="c">Use .read() multiple times</li>
+                    <li data-answer="d">Use .split() function</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> You can use "for line in f:" to read each line one at a time, which is perfect for processing lists of names or data.
+                </div>
+            </div>
+        </div>
+
+        <!-- Writing Files -->
+        <div class="quiz-section">
+            <div class="section-title">✍️ Writing Files</div>
+            
+            <div class="question" data-question="12">
+                <h3>12. What method do you use to write text to a file?</h3>
+                <ul class="options">
+                    <li data-answer="a">f.print()</li>
+                    <li data-answer="b">f.write()</li>
+                    <li data-answer="c">f.add()</li>
+                    <li data-answer="d">f.insert()</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> f.write() is used to write text to a file, like dictating a letter to an assistant.
+                </div>
+            </div>
+
+            <div class="question" data-question="13">
+                <h3>13. What's the difference between writing ('w') and appending ('a') to a file?</h3>
+                <ul class="options">
+                    <li data-answer="a">Writing is faster than appending</li>
+                    <li data-answer="b">Writing erases existing content, appending adds to the end</li>
+                    <li data-answer="c">There's no difference</li>
+                    <li data-answer="d">Appending is only for numbers</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> Writing ('w') starts fresh and erases what was there before, while appending ('a') adds to the end like adding to a diary.
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Analysis -->
+        <div class="quiz-section">
+            <div class="section-title">🔍 Code Analysis</div>
+            
+            <div class="question" data-question="14">
+                <h3>14. What will this code do?</h3>
+                <div class="code-block">with open('clients.txt', 'r') as f:
+    content = f.read()
+    print(content)</div>
+                <ul class="options">
+                    <li data-answer="a">Create a new file called clients.txt</li>
+                    <li data-answer="b">Read and display the entire contents of clients.txt</li>
+                    <li data-answer="c">Delete the clients.txt file</li>
+                    <li data-answer="d">Count the lines in clients.txt</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> This code opens clients.txt in read mode, reads all the content, and displays it on screen.
+                </div>
+            </div>
+
+            <div class="question" data-question="15">
+                <h3>15. What's wrong with this code?</h3>
+                <div class="code-block">with open('nonexistent.txt', 'r') as f:
+    content = f.read()
+    print(content)</div>
+                <ul class="options">
+                    <li data-answer="a">Missing parentheses</li>
+                    <li data-answer="b">It will cause FileNotFoundError if the file doesn't exist</li>
+                    <li data-answer="c">Wrong file mode</li>
+                    <li data-answer="d">Nothing is wrong</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> If 'nonexistent.txt' doesn't exist, Python will raise a FileNotFoundError when trying to read it.
+                </div>
+            </div>
+
+            <div class="question" data-question="16">
+                <h3>16. What will this code create?</h3>
+                <div class="code-block">with open('sales_report.txt', 'w') as f:
+    f.write("Daily Sales Report\n")
+    f.write("Total Sales: $1,250.00\n")
+    f.write("New Customers: 3\n")</div>
+                <ul class="options">
+                    <li data-answer="a">A Python script</li>
+                    <li data-answer="b">A text file with a sales report</li>
+                    <li data-answer="c">A spreadsheet</li>
+                    <li data-answer="d">A database</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> This code creates a text file called 'sales_report.txt' with three lines of sales information.
+                </div>
+            </div>
+        </div>
+
+        <!-- Fill in the Blanks -->
+        <div class="quiz-section">
+            <div class="section-title">✏️ Fill in the Blanks</div>
+            
+            <div class="question" data-question="17">
+                <h3>17. Complete this file reading code:</h3>
+                <div class="code-block"><input type="text" class="fill-blank" id="blank1" placeholder="with"> open('inventory.txt', '<input type="text" class="fill-blank" id="blank2" placeholder="mode">') as f:
+    for line in f:
+        product = line.<input type="text" class="fill-blank" id="blank3" placeholder="method">()
+        print(f"Checking stock for: {product}")</div>
+                <p><strong>Fill in:</strong> The keyword to safely open files, the mode to read files, and the method to clean up line endings.</p>
+                <button class="btn" onclick="checkFillBlanks()">Check Answers</button>
+                <div class="explanation" id="fillBlankExplanation">
+                    Correct answers: "with", "r", "strip" - This safely opens a file for reading and cleans up each line.
+                </div>
+            </div>
+        </div>
+
+        <!-- True/False -->
+        <div class="quiz-section">
+            <div class="section-title">✅ True or False</div>
+            
+            <div class="question" data-question="18">
+                <h3>18. You must always close files manually when using "with open()".</h3>
+                <ul class="options">
+                    <li data-answer="a">True</li>
+                    <li data-answer="b">False</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> False! The "with open()" statement automatically closes the file when done, even if an error occurs.
+                </div>
+            </div>
+
+            <div class="question" data-question="19">
+                <h3>19. File names are case-sensitive in Python.</h3>
+                <ul class="options">
+                    <li data-answer="a">True</li>
+                    <li data-answer="b">False</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> True! Python is very literal about file names - 'clients.txt' and 'Clients.txt' are different files.
+                </div>
+            </div>
+
+            <div class="question" data-question="20">
+                <h3>20. You can use f-strings when writing to files.</h3>
+                <ul class="options">
+                    <li data-answer="a">True</li>
+                    <li data-answer="b">False</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> True! You can use f-strings with f.write() to create dynamic content like f.write(f"Hello {name}!").
+                </div>
+            </div>
+        </div>
+
+        <!-- Real-World Application -->
+        <div class="quiz-section">
+            <div class="section-title">🌍 Real-World Application</div>
+            
+            <div class="question" data-question="21">
+                <h3>21. What would be the best approach for keeping a running log of customer support events?</h3>
+                <ul class="options">
+                    <li data-answer="a">Use 'w' mode to start fresh each time</li>
+                    <li data-answer="b">Use 'a' mode to append new entries</li>
+                    <li data-answer="c">Use 'r' mode to read existing entries</li>
+                    <li data-answer="d">Create a new file each time</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> Use 'a' mode to append new entries to the end of the log file, like adding pages to a diary.
+                </div>
+            </div>
+
+            <div class="question" data-question="22">
+                <h3>22. For processing a client list for mass email, which approach is most efficient?</h3>
+                <ul class="options">
+                    <li data-answer="a">Read the entire file with .read() and process it</li>
+                    <li data-answer="b">Use a for loop to read one line at a time</li>
+                    <li data-answer="c">Open and close the file multiple times</li>
+                    <li data-answer="d">Copy the file content manually</li>
+                </ul>
+                <div class="explanation">
+                    <strong>Correct!</strong> Using a for loop to read one line at a time is memory-efficient and perfect for processing lists of names or data.
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn" onclick="checkAllAnswers()">Check All Answers</button>
+            <button class="btn" onclick="resetQuiz()">Reset Quiz</button>
+        </div>
+
+        <div class="score-display" id="scoreDisplay">
+            <h3>🎉 Quiz Complete!</h3>
+            <p id="scoreText">Your Score: 0/22</p>
+            <p id="performanceText">Keep practicing!</p>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            1: 'b', 2: 'b', 3: 'b', 4: 'b', 5: 'b',
+            6: 'c', 7: 'b', 8: 'a', 9: 'b', 10: 'b',
+            11: 'a', 12: 'b', 13: 'b', 14: 'b', 15: 'b',
+            16: 'b', 18: 'b', 19: 'a', 20: 'a', 21: 'b',
+            22: 'b'
+        };
+
+        let currentScore = 0;
+        let totalQuestions = 22;
+        let answeredQuestions = new Set();
+
+        function selectAnswer(questionNum, selectedLi) {
+            const question = document.querySelector(`[data-question="${questionNum}"]`);
+            const options = question.querySelectorAll('.options li');
+            
+            // Remove previous selections
+            options.forEach(li => {
+                li.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            // Mark selected answer
+            selectedLi.classList.add('selected');
+            
+            // Store the answer
+            const answer = selectedLi.dataset.answer;
+            question.dataset.selectedAnswer = answer;
+            
+            updateProgress();
+        }
+
+        function checkFillBlanks() {
+            const blank1 = document.getElementById('blank1').value.trim().toLowerCase();
+            const blank2 = document.getElementById('blank2').value.trim().toLowerCase();
+            const blank3 = document.getElementById('blank3').value.trim().toLowerCase();
+            
+            let isCorrect = true;
+            
+            if (blank1 !== 'with') isCorrect = false;
+            if (blank2 !== 'r') isCorrect = false;
+            if (blank3 !== 'strip') isCorrect = false;
+            
+            const explanation = document.getElementById('fillBlankExplanation');
+            explanation.style.display = 'block';
+            
+            if (isCorrect) {
+                explanation.style.background = '#d4edda';
+                explanation.style.borderColor = '#28a745';
+                if (!answeredQuestions.has(17)) {
+                    currentScore++;
+                    answeredQuestions.add(17);
+                }
+            } else {
+                explanation.style.background = '#f8d7da';
+                explanation.style.borderColor = '#dc3545';
+            }
+            
+            updateProgress();
+        }
+
+        function checkAllAnswers() {
+            let score = 0;
+            
+            // Check multiple choice and true/false questions
+            for (let i = 1; i <= 22; i++) {
+                if (i === 17) continue; // Skip fill-in-the-blank
+                
+                const question = document.querySelector(`[data-question="${i}"]`);
+                if (!question) continue;
+                
+                const selectedAnswer = question.dataset.selectedAnswer;
+                const correctAnswer = correctAnswers[i];
+                const options = question.querySelectorAll('.options li');
+                
+                options.forEach(li => {
+                    const answer = li.dataset.answer;
+                    li.classList.remove('selected');
+                    
+                    if (answer === correctAnswer) {
+                        li.classList.add('correct');
+                    } else if (answer === selectedAnswer && answer !== correctAnswer) {
+                        li.classList.add('incorrect');
+                    }
+                });
+                
+                if (selectedAnswer === correctAnswer) {
+                    score++;
+                }
+                
+                // Show explanation
+                const explanation = question.querySelector('.explanation');
+                if (explanation) {
+                    explanation.style.display = 'block';
+                }
+            }
+            
+            // Add fill-in-the-blank score if already checked
+            if (answeredQuestions.has(17)) {
+                score++;
+            }
+            
+            currentScore = score;
+            showScore();
+        }
+
+        function showScore() {
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const scoreText = document.getElementById('scoreText');
+            const performanceText = document.getElementById('performanceText');
+            
+            scoreText.textContent = `Your Score: ${currentScore}/${totalQuestions}`;
+            
+            const percentage = (currentScore / totalQuestions) * 100;
+            if (percentage >= 90) {
+                performanceText.textContent = "Outstanding! You've mastered Python file handling! 🌟";
+                performanceText.style.color = '#28a745';
+            } else if (percentage >= 70) {
+                performanceText.textContent = "Great work! You understand file handling fundamentals! 👍";
+                performanceText.style.color = '#ffc107';
+            } else {
+                performanceText.textContent = "Keep practicing! Review the chapter and try again! 📚";
+                performanceText.style.color = '#dc3545';
+            }
+            
+            scoreDisplay.style.display = 'block';
+            updateProgress();
+        }
+
+        function resetQuiz() {
+            // Reset all selections
+            document.querySelectorAll('.options li').forEach(li => {
+                li.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            // Reset fill-in-the-blank
+            document.querySelectorAll('.fill-blank').forEach(input => {
+                input.value = '';
+            });
+            
+            // Hide explanations
+            document.querySelectorAll('.explanation').forEach(exp => {
+                exp.style.display = 'none';
+            });
+            
+            // Hide score
+            document.getElementById('scoreDisplay').style.display = 'none';
+            
+            // Reset tracking variables
+            currentScore = 0;
+            answeredQuestions.clear();
+            
+            // Reset selected answers
+            document.querySelectorAll('[data-question]').forEach(q => {
+                delete q.dataset.selectedAnswer;
+            });
+            
+            updateProgress();
+        }
+
+        function updateProgress() {
+            let answeredCount = 0;
+            
+            // Count multiple choice answers
+            for (let i = 1; i <= 22; i++) {
+                if (i === 17) continue;
+                const question = document.querySelector(`[data-question="${i}"]`);
+                if (question && question.dataset.selectedAnswer) {
+                    answeredCount++;
+                }
+            }
+            
+            // Add fill-in-the-blank if answered
+            if (answeredQuestions.has(17)) {
+                answeredCount++;
+            }
+            
+            const percentage = (answeredCount / totalQuestions) * 100;
+            document.getElementById('progressFill').style.width = percentage + '%';
+        }
+
+        // Add click event listeners to all options
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector
