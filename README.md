@@ -2,6 +2,16 @@
 Official repo for the book:
 # 🐍 Python for People Who Think They Can't Code
 
+## ⚠️ IMPORTANT PLATFORM UPDATE - November 2025
+
+**Replit changed their interface in September 2025!** Chapter 2 setup instructions look different now.
+
+📘 **[→ View Updated Setup Guide with Screenshots](./ERRATA/REPLIT_SETUP.md)**
+
+The code still works perfectly - just the setup process changed. [See all errata & updates](./ERRATA/)
+
+---
+
 Welcome to the official code repository for the book  
 **"Python for People Who Think They Can't Code"**  
 by Alex Grandpa
