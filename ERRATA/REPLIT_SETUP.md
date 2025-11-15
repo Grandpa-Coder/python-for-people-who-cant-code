@@ -12,7 +12,7 @@ Replit changed their interface in September 2025. Follow these updated steps ins
 2. Scroll down to the **"Languages"** section
 3. Click on the **Python** box (blue Python logo)
 
-![Step 1: Select Python Template](./resources/screenshots/step1-templates.png)
+![Step 1: Select Python Template](../resources/screenshots/step1-templates.png)
 
 ---
 
@@ -24,7 +24,7 @@ After clicking Python, you'll see the template description page.
 
 **Click the Remix button.**
 
-![Step 2: Click the Remix Button](./resources/screenshots/step2-remix.png)
+![Step 2: Click the Remix Button](../resources/screenshots/step2-remix.png)
 
 ### ⚠️ This is the step everyone misses!
 
@@ -40,7 +40,7 @@ A dialog box appears: "Create with Python"
 2. Leave it set to **Public**
 3. Click the blue **"Use Framework"** button (bottom right)
 
-![Step 3: Create Project Dialog](./resources/screenshots/step3-create.png)
+![Step 3: Create Project Dialog](../resources/screenshots/step3-create.png)
 
 ---
 
@@ -48,7 +48,7 @@ A dialog box appears: "Create with Python"
 
 After a few seconds, you'll see your workspace. Here's the layout:
 
-![Step 4: Initial Workspace](./resources/screenshots/step4-workspace.png)
+![Step 4: Initial Workspace](../resources/screenshots/step4-workspace.png)
 
 **What you're seeing:**
 - **Left side:** AI Agent chat (you can ignore this)
@@ -68,7 +68,7 @@ To see and edit your code:
 4. You'll see: `print("Hello World")`
 5. This is your code editor - you can now type here!
 
-![Step 5: Code Editor with main.py Open](./resources/screenshots/step5-code-editor.png)
+![Step 5: Code Editor with main.py Open](../resources/screenshots/step5-code-editor.png)
 
 Notice in the Files panel (right), **main.py** is highlighted.
 
@@ -80,7 +80,7 @@ Notice in the Files panel (right), **main.py** is highlighted.
 2. Click the **Console** tab at the top to see the output
 3. You should see: `Hello World`
 
-![Step 6: Console Showing Output](./resources/screenshots/step6-console.png)
+![Step 6: Console Showing Output](../resources/screenshots/step6-console.png)
 
 ---
 
@@ -92,7 +92,7 @@ Here's the easiest way to see both your code AND console at the same time:
 
 This creates a split screen so you can write code on left and see output on right - much easier than clicking back and forth between tabs!
 
-![Step 7: Split Screen View](./resources/screenshots/step7-split-view.png)
+![Step 7: Split Screen View](../resources/screenshots/step7-split-view.png)
 
 ---
 
