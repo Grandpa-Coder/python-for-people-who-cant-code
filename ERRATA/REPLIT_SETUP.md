@@ -2,7 +2,7 @@
 
 **Last Updated:** November 15, 2025
 
-Replit changed their interface in September 2025. Follow these updated steps instead of the screenshots in Chapter 2 of the book.
+Recently, Replit has changed its interface. Follow these updated steps instead of the screenshots in Chapter 2 of the book.
 
 ---
 
